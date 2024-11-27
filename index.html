@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yassine Boulahia - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            background-color: #111;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            height: 100vh;
+            background: url('/home/test/Bureau/Portfolio-ia/depositphotos_182244714-stock-photo-social-network-modern-flat-interface.webp') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .header-content h1 {
+            font-size: 4em;
+            color: #fff;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            margin: 0;
+        }
+
+        .header-content h2 {
+            font-size: 1.5em;
+            color: #ff5733;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+        }
+
+        nav {
+            background: rgba(0, 0, 0, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.4s ease;
+            display: inline-block;
+        }
+
+        nav ul li a:hover {
+            background: #ff5733;
+            color: #fff;
+        }
+
+        section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about, .skills, .portfolio, .contact {
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            color: #ff5733;
+            margin-bottom: 40px;
+        }
+
+        .content-box {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 40px;
+        }
+
+        .card {
+            background: #202020;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 300px;
+            padding: 30px;
+            transition: all 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .card h3 {
+            color: #ff5733;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color: rgba(32, 32, 32, 0.8);
+            color: #fff;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        .social-icons a {
+            color: #ff5733;
+            margin: 0 10px;
+            font-size: 1.5em;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #fff;
+        }
+            html {
+            scroll-behavior: smooth;
+        }
+            .slide-page {
+            position: fixed;
+            top: 0;
+            left: 100%;
+            width: 100%;
+            height: 100%;
+            transition: transform 1s ease;
+            z-index: 10;
+        }
+
+        .slide-page.show {
+            transform: translateX(-100%);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Yassine Boulahia</h1>
+            <h2>Étudiant en BTS SIO & Recherche de Stage</h2>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about">À propos</a></li>
+            <li><a href="#skills">Compétences</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="about">
+        <h2 class="section-title">À propos</h2>
+        <p>Je suis Yassine Boulahia, un étudiant passionné par l'informatique, en BTS SIO. Je recherche actuellement un stage pour mettre en pratique mes compétences techniques et contribuer à des projets innovants.</p>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Compétences</h2>
+        <div class="content-box">
+            <div class="card">
+                <h3>Cybersécurité</h3>
+                <p>RGPD, bonnes pratiques, sécurisation des équipements et services.</p>
+            </div>
+            <div class="card">
+                <h3>Fibre Optique</h3>
+                <p>Vérification des signaux, soudure des fibres de chaque boîtier.</p>
+            </div>
+            <div class="card">
+                <h3>Maintenance Vidéo Surveillance</h3>
+                <p>Installation de caméras, vérification du système de communication des caméras IP.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <h2 class="section-title">Portfolio</h2>
+        <div class="content-box">
+            <div class="card">
+                <h3>Fibre Optique - MAF</h3>
+                <p>Vérification des signaux, soudure des fibres de chaque boîtier (2022-2023).</p>
+            </div>
+            <div class="card">
+                <h3>Maintenance Vidéo Surveillance - Vps-sitex</h3>
+                <p>Installation et maintenance de systèmes de vidéo surveillance (2022-2023).</p>
+            </div>
+            <div class="card">
+                <h3>Dépannage Ordinateurs & Mac</h3>
+                <p>Résolution des problèmes de surchauffe, récupération des données (2023-2024).</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Contact</h2>
+        <div class="content-box">
+            <div class="card">
+                <h3>Contactez-moi</h3>
+                <p>Téléphone : 06.27.32.51.58</p>
+                <p>Email : <a href="mailto:bou.yassine@laposte.net">bou.yassine@laposte.net</a></p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Yassine Boulahia - Tous droits réservés.</p>
+    </footer>
+    <script>
+        document.querySelectorAll('nav ul li a').forEach(anchor => {
+            anchor.addEventListener('click', function (event) {
+                event.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        window.addEventListener('load', function() {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.classList.add('slide-page');
+                setTimeout(() => {
+                    section.classList.add('show');
+                }, 100);
+</body>
+            </div>
+            <div class="formation-item">
+                <h3>Collège Jean Moulin / Gustave Courbet (2017-2021)</h3>
+                <p>Brevet du collège à Chaville / Romainville</p>
+            </div>
+
+        </div>
+        <div class="window" id="competences">
+        <h2>Compétences</h2>
+     
+        <ul>
+
+            <li>Cybersécurité (RGPD, bonnes pratiques, sécurisation des équipements et services)</li>
+            <li>Vérification des signaux en fibre optique</li>
+            <li>Maintenance et installation de systèmes de vidéo surveillance</li>
+            <li>Dépannage et réparation des ordinateurs Mac & PC</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="window" id="contact">
+            <h2>Contact</h2>
+            <p><strong>Téléphone :</strong> 06.27.32.51.58</p>
+            <p><strong>Adresse :</strong> 1, villa Parmentier, 93230 Romainville</p>
+            <p><strong>Email :</strong> <a href="mailto:bou.yassine@laposte.net">bou.yassine@laposte.net</a></p>
+        </div>
+
+        <div class="window" id="interets">
+            <h2>Centres d'intérêt</h2>
+            <ul>
+                <li>Boxe Thaïlandaise</li>
+                <li>Football</li>
+                <li>Jeux Vidéo</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Yassine Boulahia - Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
