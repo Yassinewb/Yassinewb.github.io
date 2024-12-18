@@ -43,11 +43,11 @@
             font-size: 1.5em;
             font-weight: bold;
             position: absolute;
-            top: 0;
-            left: 0;
-            padding: 20px;
+            top: 50%; /* Centrer verticalement par rapport à la barre de navigation */
+            left: 20px; /* Espacement à gauche */
+            transform: translateY(-50%); /* Ajuster pour le centrer précisément */
             animation: slideIn 2s ease-out forwards;
-            white-space: nowrap; /* Empêche le texte de se casser */
+            white-space: nowrap;
         }
 
         .logo small {
@@ -250,8 +250,7 @@
                 <p>Brevet des collèges</p>
                 <small>2017 - 2021 - Mention Bien</small>
             </div>
-        </div
-
+        </div>
     </section>
 
     <!-- Portfolio Section -->
