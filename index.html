@@ -19,16 +19,15 @@
 
         /* Navigation bar */
         nav {
-            background: rgba(0, 0, 0, 0.9); /* Plus sombre et opaque */
+            background: rgba(0, 0, 0, 0.9);
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
             padding: 20px 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);  /* Ombre portée pour la profondeur */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
         }
 
-        /* Container for the logo and links */
         .nav-container {
             display: flex;
             align-items: center;
@@ -42,13 +41,13 @@
             color: #fff;
             font-size: 1.5em;
             font-weight: bold;
-            animation: slideIn 2s ease-out; /* Application de l'animation */
+            animation: slideIn 2s ease-out;
         }
 
         .logo small {
             font-size: 0.6em;
             color: #ff5733;
-            animation: slideIn 2s ease-out 1s; /* Application de l'animation avec un délai */
+            animation: slideIn 2s ease-out 1s;
         }
 
         @keyframes slideIn {
@@ -70,7 +69,7 @@
             margin: 0;
         }
         nav ul li {
-            margin: 0 20px;
+            margin: 0 15px;
         }
         nav ul li a {
             text-decoration: none;
@@ -87,7 +86,7 @@
 
         /* Adding space below navigation */
         body {
-            padding-top: 80px; /* For the fixed navbar */
+            padding-top: 80px;
         }
 
         /* Section Styles */
@@ -176,6 +175,7 @@
             <ul>
                 <li><a href="#about">À propos</a></li>
                 <li><a href="#skills">Compétences</a></li>
+                <li><a href="#formation">Formation</a></li>
                 <li><a href="#portfolio">Expérience</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -212,13 +212,33 @@
                 <h3>Visual Studio Code</h3>
                 <p>Éditeur de code extensible pour le développement web et la gestion de projet.</p>
             </div>
-            
             <div class="card">
                 <img src="https://img.icons8.com/ios-filled/50/000000/cyber-security.png" alt="Cybersécurité">
                 <h3>Cybersécurité</h3>
                 <p>RGPD, bonnes pratiques, sécurisation des équipements et services.</p>
             </div>
+        </div>
+    </section>
 
+    <!-- Formation Section -->
+    <section id="formation">
+        <h2 class="section-title">Formation</h2>
+        <div class="content-box">
+            <div class="card">
+                <h3>Lycée René Descartes</h3>
+                <p>BTS SIO (Service Informatique aux Organisations - Cybersécurité)</p>
+                <small>2024 - 2026</small>
+            </div>
+            <div class="card">
+                <h3>Lycée Alfred Costes</h3>
+                <p>Baccalauréat Professionnel SN (option RISC)</p>
+                <small>2022 - 2024 - Mention Assez Bien</small>
+            </div>
+            <div class="card">
+                <h3>Collège Jean Moulin</h3>
+                <p>Brevet des collèges</p>
+                <small>2017 - 2021 - Mention Bien</small>
+            </div>
         </div>
     </section>
 
@@ -252,7 +272,6 @@
                 <div class="social-icons">
                     <a href="https://github.com/Yasskoir93" target="_blank"><i class="fab fa-github"></i></a> <!-- Lien vers GitHub -->
                     <a href="https://www.linkedin.com/in/yassine-boulahia-82535b258/" target="_blank"><i class="fab fa-linkedin"></i></a> <!-- Lien vers LinkedIn -->
-                    <a href="#"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
 
@@ -266,6 +285,3 @@
     <footer>
         <p>&copy; 2024 Yassine Boulahia - Tous droits réservés.</p>
     </footer>
-
-</body>
-</html>
