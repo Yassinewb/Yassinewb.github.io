@@ -31,7 +31,7 @@
         .nav-container {
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Ajusté pour séparer les éléments */
+            justify-content: space-between;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
@@ -42,22 +42,22 @@
             color: #fff;
             font-size: 1.5em;
             font-weight: bold;
-            position: absolute; /* Position absolue pour le fixer à gauche */
+            position: absolute;
             top: 0;
-            left: 20px; /* Espace du bord */
+            left: 0;
             padding: 20px;
-            animation: slideInFromLeft 2s ease-out; /* Animation */
-            white-space: nowrap;
+            animation: slideIn 2s ease-out forwards;
+            white-space: nowrap; /* Empêche le texte de se casser */
         }
 
         .logo small {
             font-size: 0.6em;
             color: #ff5733;
-            animation: slideInFromLeft 2s ease-out 1s;
-            display: block;
+            animation: slideIn 2s ease-out 1s forwards;
+            display: block; /* Affiche "small" sous "logo" sans modifier la taille du logo principal */
         }
 
-        @keyframes slideInFromLeft {
+        @keyframes slideIn {
             from {
                 transform: translateX(-100%);
                 opacity: 0;
@@ -76,12 +76,10 @@
             margin: 0;
             width: 100%;
         }
-
         nav ul li {
             flex: 1;
             text-align: center;
         }
-
         nav ul li a {
             text-decoration: none;
             color: #fff;
@@ -91,60 +89,89 @@
             transition: all 0.4s ease;
             display: block;
         }
-
         nav ul li a:hover {
             background: #ff5733;
             color: #fff;
         }
 
+        /* Adding space below navigation */
         body {
             padding-top: 80px;
         }
 
-        /* Image Section */
-        .image-container {
-            text-align: center;
-            margin: 50px 0;
-        }
-
-        .image-container img {
-            width: 30%;
-            max-width: 2480px;
-            height: auto;
-            display: block;
+        /* Section Styles */
+        section {
+            padding: 100px 20px;
+            max-width: 1200px;
             margin: 0 auto;
-        }
-
-        .download-btn {
-            background-color: #ff5733;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            position: relative;
-        }
-
-        .download-btn:hover {
-            background-color: #e84e2b;
-        }
-
-        .download-btn {
-            position: absolute;
-            top: 50%;
-            right: 20px;
-            transform: translateY(-50%);
-            z-index: 1100;
-        }
-
-        footer {
             text-align: center;
-            padding: 20px;
-            background-color: #111;
-            color: #e0e0e0;
-            font-size: 0.9em;
         }
+
+        .section-title {
+            font-size: 2.5em;
+            color: #ff5733;
+            margin-bottom: 40px;
+        }
+
+        /* Competence Cards */
+        .content-box {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: #202020;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 300px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .card h3 {
+            color: #ff5733;
+            margin-bottom: 20px;
+        }
+
+        .card p {
+            color: #fff;
+        }
+
+        .card img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(32, 32, 32, 0.8);
+            color: #fff;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        /* Social Icons */
+        .social-icons a {
+            color: #ff5733;
+            margin: 0 10px;
+            font-size: 1.5em;
+            transition: color 0.3s;
+        }
+        .social-icons a:hover {
+            color: #fff;
+        }
+
     </style>
 </head>
 <body>
@@ -172,9 +199,49 @@
         <p>Je suis Yassine Boulahia, un étudiant passionné par l'informatique, en BTS SIO. Je recherche actuellement un stage pour mettre en pratique mes compétences techniques et contribuer à des projets innovants.</p>
     </section>
 
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2024 Yassine Boulahia - Tous droits réservés.</p>
-    </footer>
-</body>
-</html>
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">Compétences</h2>
+        <div class="content-box">
+            <div class="card">
+                <img src="https://img.icons8.com/ios-filled/50/000000/python.png" alt="Python">
+                <h3>Python</h3>
+                <p>Langage polyvalent utilisé pour le développement web, la science des données et l'automatisation.</p>
+            </div>
+            <div class="card">
+                <img src="https://img.icons8.com/ios-filled/50/000000/html-5.png" alt="HTML">
+                <h3>HTML</h3>
+                <p>Langage utilisé pour structurer les pages web et leur contenu.</p>
+            </div>
+            <div class="card">
+                <img src="https://img.icons8.com/ios-filled/50/000000/javascript.png" alt="JavaScript">
+                <h3>JavaScript</h3>
+                <p>Langage de programmation pour rendre les pages web interactives et dynamiques.</p>
+            </div>
+            <div class="card">
+                <img src="https://cdn.icon-icons.com/icons2/2248/PNG/512/microsoft_visual_studio_code_icon_137397.png" alt="Visual Studio Code">
+                <h3>Visual Studio Code</h3>
+                <p>Éditeur de code extensible pour le développement web et la gestion de projet.</p>
+            </div>
+            <div class="card">
+                <img src="https://img.icons8.com/ios-filled/50/000000/cyber-security.png" alt="Cybersécurité">
+                <h3>Cybersécurité</h3>
+                <p>RGPD, bonnes pratiques, sécurisation des équipements et services.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formation Section -->
+    <section id="formation">
+        <h2 class="section-title">Formation</h2>
+        <div class="content-box">
+            <div class="card">
+                <h3>Lycée René Descartes</h3>
+                <p>BTS SIO (Service Informatique aux Organisations - Cybersécurité)</p>
+                <small>2024 - 2026</small>
+            </div>
+            <div class="card">
+                <h3>Lycée Alfred Costes</h3>
+                <p>Baccalauréat Professionnel SN (option RISC)</p>
+                <small>2022 - 2024 - Mention Assez Bien</small>
+            </
