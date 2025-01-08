@@ -3,174 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yassine Boulahia - Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Formation Lycée Alfred Costes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        /* Global Styles */
-        body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            background-color: #111;
-            color: #e0e0e0;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background-color: #121212;
+            color: #e0e0e0;
             overflow-x: hidden;
         }
 
-        /* Navigation bar */
-        nav {
-            background: rgba(0, 0, 0, 0.9);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 20px 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-        }
-
-        .nav-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            width: 100%;
-        }
-
-        .logo {
-            color: #fff;
-            font-size: 1.5em;
-            font-weight: bold;
-            animation: slideInFromLeft 2s ease-out; /* Animation pour entrer depuis la gauche */
-            white-space: nowrap;
-            position: absolute;
-            left: 0;
-            padding-left: 20px; /* Espace pour le coller à la paroi */
-        }
-
-        .logo small {
-            font-size: 0.6em;
-            color: #ff5733;
-            animation: slideIn 2s ease-out 1s forwards;
-            display: block; /* Affiche "small" sous "logo" sans modifier la taille du logo principal */
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            padding: 0;
-            margin: 0;
-            width: 100%;
-        }
-        nav ul li {
-            flex: 1;
-            text-align: center;
-        }
-        nav ul li a {
-            text-decoration: none;
-            color: #fff;
-            font-weight: bold;
-            padding: 10px 20px;
-            border-radius: 30px;
-            transition: all 0.4s ease;
-            display: block;
-        }
-        nav ul li a:hover {
-            background: #ff5733;
-            color: #fff;
-        }
-
-        /* Adding space below navigation */
-        body {
-            padding-top: 80px;
-        }
-
-        /* Section Styles */
-        section {
-            padding: 100px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .section-title {
-            font-size: 2.5em;
-            color: #ff5733;
-            margin-bottom: 40px;
-        }
-
-        /* Competence Cards */
-        .content-box {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            background: #202020;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            width: 300px;
-            padding: 30px;
-            transition: all 0.4s ease;
-            text-align: center;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .card h3 {
-            color: #ff5733;
+        /* Reset */
+        h1, h2, h3, p {
             margin-bottom: 20px;
         }
 
-        .card p {
+        /* Fullscreen Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #1c1c1c;
+            padding: 7px;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .nav-container {
+    display: flex;
+    justify-content: flex-start; /* Aligne tout à gauche */
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    padding-right: 20px; /* Espace à droite du logo pour qu'il ne touche pas directement le texte suivant */
+}
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        nav ul li {
+            list-style: none;
+        }
+
+        nav ul li a {
+    text-decoration: none;
+    color: #ff5733;
+    font-size: 1rem; /* Réduis la taille de la police ici */
+    font-weight: 600;
+    position: relative;
+    padding: 10px;
+    transition: color 0.3s ease;
+    
+}
+
+
+        nav ul li a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #ff5733;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        nav ul li a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        nav ul li a:hover {
             color: #fff;
         }
 
-        .card img {
+        /* Animations for text typing effect */
+        .typing-effect {
+            display: inline-block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ff5733;
+            border-right: 2px solid #ff5733;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 4s steps(30) 1s forwards, blink 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        /* Main content sections */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        section h2 {
+            color: #ff5733;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 50px;
-            height: 50px;
+            height: 4px;
+            background: #ff5733;
+            border-radius: 50px;
+            animation: pulse 1.2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% {
+                width: 50px;
+            }
+            100% {
+                width: 70px;
+            }
+        }
+
+        .content-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 40px;
+            justify-items: center;
+        }
+
+        .card {
+            background-color: #1c1c1c;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease-in-out;
+            color: #fff;
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .card img {
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             margin-bottom: 20px;
         }
 
         /* Footer */
         footer {
-            background-color: rgba(32, 32, 32, 0.8);
-            color: #fff;
+            background-color: #121212;
+            padding: 40px 20px;
             text-align: center;
-            padding: 30px;
+            color: #fff;
             margin-top: 50px;
         }
 
-        /* Social Icons */
-        .social-icons a {
-            color: #ff5733;
-            margin: 0 10px;
-            font-size: 1.5em;
-            transition: color 0.3s;
+        footer p {
+            font-size: 1rem;
+            margin-bottom: 20px;
         }
-        .social-icons a:hover {
+
+        footer .social-icons {
+            margin-top: 20px;
+        }
+
+        footer .social-icons a {
+            color: #ff5733;
+            margin: 0 15px;
+            font-size: 1.6rem;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-icons a:hover {
             color: #fff;
         }
 
+        /* Mobile Responsiveness */
+        @media screen and (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .content-box {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .card {
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -181,25 +250,30 @@
                 Yassine Boulahia
                 <br><small>Étudiant en BTS SIO</small>
             </div>
+            
             <ul>
                 <li><a href="#about">À propos</a></li>
                 <li><a href="#skills">Compétences</a></li>
                 <li><a href="#formation">Formation</a></li>
                 <li><a href="#portfolio">Experience</a></li>
-                <li><a href="#Veille">Veille technologique</a></li>
                 <li><a href="cv.html">CV</a></li>
+                <li><a href="#Veille">Veille technologique</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- About Section -->
-    <section id="about">
-        <h2 class="section-title">À propos</h2>
-        <p>Je suis Yassine Boulahia, un étudiant passionné par l'informatique, en BTS SIO. Je recherche actuellement un stage pour mettre en pratique mes compétences techniques et contribuer à des projets innovants.</p>
-    </section>
+<!-- About Section -->
+<section id="about">
+    <h2 class="section-title">À propos</h2>
+    <p>Je suis Yassine Boulahia, un étudiant dynamique et passionné par l'informatique, actuellement en BTS Services Informatiques aux Organisations (SIO). Mon parcours académique m'a permis d'acquérir une solide base de compétences techniques, allant de la gestion des réseaux informatiques à la programmation de solutions logicielles adaptées à divers besoins.</p>
+    <p>Mon objectif est d'approfondir mes connaissances en informatique, notamment en développement web, gestion de systèmes et cybersécurité. En parallèle, je cherche un stage dans le domaine pour mettre en pratique mes compétences et participer activement à des projets innovants et enrichissants.</p>
+    <p>Je suis particulièrement intéressé par l'optimisation des processus informatiques, la sécurisation des données et le développement de solutions numériques créatives. À travers mes projets, je m'efforce toujours d'allier efficacité technique et user experience (UX), en adoptant des solutions agiles et modernes.</p>
+    <p>Je suis convaincu que l'informatique est un domaine en constante évolution, et je suis prêt à relever de nouveaux défis tout en contribuant à des projets de transformation numérique dans un environnement professionnel stimulant.</p>
+</section>
 
-    <!-- Skills Section -->
+
+
     <section id="skills">
         <h2 class="section-title">Compétences</h2>
         <div class="content-box">
@@ -207,52 +281,110 @@
                 <img src="https://img.icons8.com/ios-filled/50/000000/python.png" alt="Python">
                 <h3>Python</h3>
                 <p>Langage polyvalent utilisé pour le développement web, la science des données et l'automatisation.</p>
+                <div style="margin-top: 20px;">
+                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        Détails
+                    </button>
+                </div>
             </div>
             <div class="card">
                 <img src="https://img.icons8.com/ios-filled/50/000000/html-5.png" alt="HTML">
                 <h3>HTML</h3>
                 <p>Langage utilisé pour structurer les pages web et leur contenu.</p>
+                <div style="margin-top: 20px;">
+                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        Détails
+                    </button>
+                </div>
             </div>
             <div class="card">
                 <img src="https://img.icons8.com/ios-filled/50/000000/javascript.png" alt="JavaScript">
                 <h3>JavaScript</h3>
                 <p>Langage de programmation pour rendre les pages web interactives et dynamiques.</p>
+                <div style="margin-top: 20px;">
+                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        Détails
+                    </button>
+                </div>
             </div>
             <div class="card">
                 <img src="https://cdn.icon-icons.com/icons2/2248/PNG/512/microsoft_visual_studio_code_icon_137397.png" alt="Visual Studio Code">
                 <h3>Visual Studio Code</h3>
                 <p>Éditeur de code extensible pour le développement web et la gestion de projet.</p>
+                <div style="margin-top: 20px;">
+                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        Détails
+                    </button>
+                </div>
             </div>
+            <!-- Cybersécurité déplacé sous JavaScript -->
             <div class="card">
                 <img src="https://img.icons8.com/ios-filled/50/000000/cyber-security.png" alt="Cybersécurité">
                 <h3>Cybersécurité</h3>
                 <p>RGPD, bonnes pratiques, sécurisation des équipements et services.</p>
+                <div style="margin-top: 20px;">
+                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        Détails
+                    </button>
+                </div>
+            </div>
+            <!-- Arduino ajouté ici -->
+            <div class="card">
+                <img src="https://img.icons8.com/ios-filled/50/000000/arduino.png" alt="Arduino">
+                <h3>Arduino</h3>
+                <p>Plateforme de prototypage pour la création de circuits et objets électroniques programmables.</p>
+                <div style="margin-top: 20px;">
+                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        Détails
+                    </button>
+                </div>
             </div>
         </div>
     </section>
+    
 
-    <!-- Formation Section -->
-    <section id="formation">
-        <h2 class="section-title">Formation</h2>
-        <div class="content-box">
-            <div class="card">
+
+
+
+<!-- Formation Section -->
+<section id="formation">
+    <h2 class="section-title">Formation</h2>
+    <div class="content-box" style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+        <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; height: 200px;">
+            <div>
                 <h3>Lycée René Descartes</h3>
                 <p>BTS SIO (Service Informatique aux Organisations - Cybersécurité)</p>
                 <small>2024 - 2026</small>
             </div>
-            <div class="card">
+            <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: auto;">
+                S'informer
+            </button>
+        </div>
+        <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; height: 200px;">
+            <div>
                 <h3>Lycée Alfred Costes</h3>
                 <p>Baccalauréat Professionnel SN (option RISC)</p>
                 <small>2022 - 2024 - Mention Assez Bien</small>
             </div>
-            <div class="card">
+            <button onclick="window.location.href='ALFREDCOSTES.html';" style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: auto;">
+
+                S'informer
+            </button>
+        </div>
+        <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; height: 200px;">
+            <div>
                 <h3>Collège Jean Moulin</h3>
                 <p>Brevet des collèges</p>
                 <small>2017 - 2021 - Mention Bien</small>
             </div>
-        </div
+            <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: auto;">
+                S'informer
+            </button>
+        </div>
+    </div>
+</section>
 
-    </section>
+
 
     <!-- Portfolio Section -->
     <section id="portfolio">
@@ -277,7 +409,6 @@
     <!-- Contact Section -->
     <section id="contact">
         <h2 class="section-title">Contact</h2>
-        <div class="content-box">
             <div class="card">
                 <h3>Contactez-moi</h3>
                 <p>Téléphone : 06.27.32.51.58</p>
@@ -285,7 +416,7 @@
                 <div class="social-icons">
                     <a href="https://github.com/Yassinewb" target="_blank"><i class="fab fa-github"></i></a> <!-- Lien vers GitHub -->
                     <a href="https://www.linkedin.com/in/yassine-boulahia-82535b258/" target="_blank"><i class="fab fa-linkedin"></i></a> <!-- Lien vers LinkedIn -->
-                </div>
+                </div>                
             </div>
 
     </section>
