@@ -25,74 +25,112 @@
             margin-bottom: 20px;
         }
 
-        /* Fullscreen Navigation */
+        /* Navigation bar */
         nav {
+            background: rgba(0, 0, 0, 0.9);
             position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
-            background-color: #1c1c1c;
-            padding: 7px;
+            width: 100%;
             z-index: 1000;
-            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
         }
 
         .nav-container {
-    display: flex;
-    justify-content: flex-start; /* Aligne tout à gauche */
-    align-items: center;
-    gap: 20px;
-}
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
 
-.logo {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #ffffff;
-    padding-right: 20px; /* Espace à droite du logo pour qu'il ne touche pas directement le texte suivant */
-}
+        .logo {
+            color: #fff;
+            font-size: 1.5em;
+            font-weight: bold;
+            animation: slideInFromLeft 2s ease-out;
+            white-space: nowrap;
+            position: absolute;
+            left: 0;
+            padding-left: 20px;
+        }
+
+        .logo small {
+            font-size: 0.6em;
+            color: #ff5733;
+            animation: slideInFromLeft 2s ease-out 1s;
+            display: block;
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
 
         nav ul {
+            list-style: none;
             display: flex;
             justify-content: center;
-            gap: 30px;
+            padding: 0;
+            margin: 0;
+            width: 100%;
         }
 
         nav ul li {
-            list-style: none;
+            flex: 1;
+            text-align: center;
         }
 
         nav ul li a {
-    text-decoration: none;
-    color: #ff5733;
-    font-size: 1rem; /* Réduis la taille de la police ici */
-    font-weight: 600;
-    position: relative;
-    padding: 10px;
-    transition: color 0.3s ease;
-    
-}
-
-
-        nav ul li a::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: #ff5733;
-            transform: scaleX(0);
-            transform-origin: bottom right;
-            transition: transform 0.25s ease-out;
-        }
-
-        nav ul li a:hover::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.4s ease;
+            display: block;
         }
 
         nav ul li a:hover {
+            background: #ff5733;
             color: #fff;
+            transform: scale(0.9);
+        }
+
+        /* Adding space below navigation */
+        body {
+            padding-top: 80px;
+        }
+
+        .download-btn {
+            background-color: #ff5733;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            position: relative;
+        }
+
+        .download-btn:hover {
+            background-color: #e84e2b;
+        }
+
+        .download-btn {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 1100;
         }
 
         /* Animations for text typing effect */
@@ -250,7 +288,6 @@
                 Yassine Boulahia
                 <br><small>Étudiant en BTS SIO</small>
             </div>
-            
             <ul>
                 <li><a href="#about">À propos</a></li>
                 <li><a href="#skills">Compétences</a></li>
@@ -261,18 +298,18 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
+        <!-- Bouton de téléchargement au même niveau que les éléments du menu -->
+        <a href="Veille.pdf" download="veille.pdf" class="download-btn">Télécharger</a>
     </nav>
 
-<!-- About Section -->
-<section id="about">
-    <h2 class="section-title">À propos</h2>
-    <p>Je suis Yassine Boulahia, un étudiant dynamique et passionné par l'informatique, actuellement en BTS Services Informatiques aux Organisations (SIO). Mon parcours académique m'a permis d'acquérir une solide base de compétences techniques, allant de la gestion des réseaux informatiques à la programmation de solutions logicielles adaptées à divers besoins.</p>
-    <p>Mon objectif est d'approfondir mes connaissances en informatique, notamment en développement web, gestion de systèmes et cybersécurité. En parallèle, je cherche un stage dans le domaine pour mettre en pratique mes compétences et participer activement à des projets innovants et enrichissants.</p>
-    <p>Je suis particulièrement intéressé par l'optimisation des processus informatiques, la sécurisation des données et le développement de solutions numériques créatives. À travers mes projets, je m'efforce toujours d'allier efficacité technique et user experience (UX), en adoptant des solutions agiles et modernes.</p>
-    <p>Je suis convaincu que l'informatique est un domaine en constante évolution, et je suis prêt à relever de nouveaux défis tout en contribuant à des projets de transformation numérique dans un environnement professionnel stimulant.</p>
-</section>
-
-
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">À propos</h2>
+        <p>Je suis Yassine Boulahia, un étudiant dynamique et passionné par l'informatique, actuellement en BTS Services Informatiques aux Organisations (SIO). Mon parcours académique m'a permis d'acquérir une solide base de compétences techniques, allant de la gestion des réseaux informatiques à la programmation de solutions logicielles adaptées à divers besoins.</p>
+        <p>Mon objectif est d'approfondir mes connaissances en informatique, notamment en développement web, gestion de systèmes et cybersécurité. En parallèle, je cherche un stage dans le domaine pour mettre en pratique mes compétences et participer activement à des projets innovants et enrichissants.</p>
+        <p>Je suis particulièrement intéressé par l'optimisation des processus informatiques, la sécurisation des données et le développement de solutions numériques créatives. À travers mes projets, je m'efforce toujours d'allier efficacité technique et user experience (UX), en adoptant des solutions agiles et modernes.</p>
+        <p>Je suis convaincu que l'informatique est un domaine en constante évolution, et je suis prêt à relever de nouveaux défis tout en contribuant à des projets de transformation numérique dans un environnement professionnel stimulant.</p>
+    </section>
 
     <section id="skills">
         <h2 class="section-title">Compétences</h2>
@@ -317,7 +354,6 @@
                     </button>
                 </div>
             </div>
-            <!-- Cybersécurité déplacé sous JavaScript -->
             <div class="card">
                 <img src="https://img.icons8.com/ios-filled/50/000000/cyber-security.png" alt="Cybersécurité">
                 <h3>Cybersécurité</h3>
@@ -328,7 +364,6 @@
                     </button>
                 </div>
             </div>
-            <!-- Arduino ajouté ici -->
             <div class="card">
                 <img src="https://img.icons8.com/ios-filled/50/000000/arduino.png" alt="Arduino">
                 <h3>Arduino</h3>
@@ -341,50 +376,43 @@
             </div>
         </div>
     </section>
-    
 
-
-
-
-<!-- Formation Section -->
-<section id="formation">
-    <h2 class="section-title">Formation</h2>
-    <div class="content-box" style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
-        <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; height: 200px;">
-            <div>
-                <h3>Lycée René Descartes</h3>
-                <p>BTS SIO (Service Informatique aux Organisations - Cybersécurité)</p>
-                <small>2024 - 2026</small>
+    <!-- Formation Section -->
+    <section id="formation">
+        <h2 class="section-title">Formation</h2>
+        <div class="content-box" style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; height: 200px;">
+                <div>
+                    <h3>Lycée René Descartes</h3>
+                    <p>BTS SIO (Service Informatique aux Organisations - Cybersécurité)</p>
+                    <small>2024 - 2026</small>
+                </div>
+                <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: auto;">
+                    S'informer
+                </button>
             </div>
-            <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: auto;">
-                S'informer
-            </button>
-        </div>
-        <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; height: 200px;">
-            <div>
-                <h3>Lycée Alfred Costes</h3>
-                <p>Baccalauréat Professionnel SN (option RISC)</p>
-                <small>2022 - 2024 - Mention Assez Bien</small>
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; height: 200px;">
+                <div>
+                    <h3>Lycée Alfred Costes</h3>
+                    <p>Baccalauréat Professionnel SN (option RISC)</p>
+                    <small>2022 - 2024 - Mention Assez Bien</small>
+                </div>
+                <button onclick="window.location.href='ALFREDCOSTES.html';" style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: auto;">
+                    S'informer
+                </button>
             </div>
-            <button onclick="window.location.href='ALFREDCOSTES.html';" style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: auto;">
-
-                S'informer
-            </button>
-        </div>
-        <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; height: 200px;">
-            <div>
-                <h3>Collège Jean Moulin</h3>
-                <p>Brevet des collèges</p>
-                <small>2017 - 2021 - Mention Bien</small>
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; height: 200px;">
+                <div>
+                    <h3>Collège Jean Moulin</h3>
+                    <p>Brevet des collèges</p>
+                    <small>2017 - 2021 - Mention Bien</small>
+                </div>
+                <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: auto;">
+                    S'informer
+                </button>
             </div>
-            <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: auto;">
-                S'informer
-            </button>
         </div>
-    </div>
-</section>
-
-
+    </section>
 
     <!-- Portfolio Section -->
     <section id="portfolio">
@@ -394,7 +422,6 @@
                 <h3>Fibre Optique - MAF</h3>
                 <p>Vérification des signaux, soudure des fibres (2022-2023).</p>
             </div>
-
             <div class="card">
                 <h3>Vidéo Surveillance - VPS-Sitex</h3>
                 <p>Installation et maintenance de systèmes (2022-2023).</p>
@@ -409,18 +436,13 @@
     <!-- Contact Section -->
     <section id="contact">
         <h2 class="section-title">Contact</h2>
-            <div class="card">
-                <h3>Contactez-moi</h3>
-                <p>Téléphone : 06.27.32.51.58</p>
-                <p>Email : <a href="mailto:bou.yassine@laposte.net">bou.yassine@laposte.net</a></p>
-                <div class="social-icons">
-                    <a href="https://github.com/Yassinewb" target="_blank"><i class="fab fa-github"></i></a> <!-- Lien vers GitHub -->
-                    <a href="https://www.linkedin.com/in/yassine-boulahia-82535b258/" target="_blank"><i class="fab fa-linkedin"></i></a> <!-- Lien vers LinkedIn -->
-                </div>                
-            </div>
-
-    </section>
-                </div>
+        <div class="card">
+            <h3>Contactez-moi</h3>
+            <p>Téléphone : 06.27.32.51.58</p>
+            <p>Email : <a href="mailto:bou.yassine@laposte.net">bou.yassine@laposte.net</a></p>
+            <div class="social-icons">
+                <a href="https://github.com/Yassinewb" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/yassine-boulahia-82535b258/" target="_blank"><i class="fab fa-linkedin"></i></a>
             </div>
         </div>
     </section>
@@ -429,3 +451,5 @@
     <footer>
         <p>&copy; 2024 Yassine Boulahia - Tous droits réservés.</p>
     </footer>
+</body>
+</html>
