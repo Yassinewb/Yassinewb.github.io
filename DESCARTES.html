@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation BTS SIO - Cybersécurité</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background-color: #121212;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        /* Reset */
+        h1, h2, h3, p {
+            margin-bottom: 20px;
+        }
+
+        /* Fullscreen Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #1c1c1c;
+            padding: 20px;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        nav ul li {
+            list-style: none;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #ff5733;
+            font-size: 1.2rem;
+            font-weight: 600;
+            position: relative;
+            padding: 10px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #ff5733;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        nav ul li a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        nav ul li a:hover {
+            color: #fff;
+        }
+
+        /* Animations for text typing effect */
+        .typing-effect {
+            display: inline-block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ff5733;
+            border-right: 2px solid #ff5733;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 4s steps(30) 1s forwards, blink 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        /* Main content sections */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        section h2 {
+            color: #ff5733;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 4px;
+            background: #ff5733;
+            border-radius: 50px;
+            animation: pulse 1.2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% {
+                width: 50px;
+            }
+            100% {
+                width: 70px;
+            }
+        }
+
+        .content-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 40px;
+            justify-items: center;
+        }
+
+        .card {
+            background-color: #1c1c1c;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease-in-out;
+            color: #fff;
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #121212;
+            padding: 40px 20px;
+            text-align: center;
+            color: #fff;
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        footer .social-icons {
+            margin-top: 20px;
+        }
+
+        footer .social-icons a {
+            color: #ff5733;
+            margin: 0 15px;
+            font-size: 1.6rem;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-icons a:hover {
+            color: #fff;
+        }
+
+        /* Mobile Responsiveness */
+        @media screen and (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .content-box {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="#failover">Failover et Haute Disponibilité</a></li>
+            <li><a href="#dns">DNS</a></li>
+            <li><a href="#firewall">Filtrage et NAT</a></li>
+            <li><a href="#replication">Réplication</a></li>
+        </ul>
+    </nav>
+
+    <!-- Section: Failover et Haute Disponibilité -->
+    <section id="failover">
+        <h2><span class="typing-effect">Failover et Haute Disponibilité</span></h2>
+        <p>Durant ma formation, j'ai mis en place des techniques de haute disponibilité, telles que le failover actif/passif et la répartition de charge, permettant d'assurer la disponibilité continue des services, même en cas de défaillance d'un serveur.</p>
+    </section>
+
+    <!-- Section: DNS -->
+    <section id="dns">
+        <h2><span class="typing-effect">Gestion des DNS</span></h2>
+        <p>La gestion des serveurs DNS est cruciale pour un réseau fonctionnel. J'ai configuré des serveurs DNS pour assurer la résolution des noms de domaine au sein de l'organisation, notamment en configurant un serveur cache et en gérant les zones DNS.</p>
+    </section>
+
+    <!-- Section: Filtrage et NAT -->
+    <section id="firewall">
+        <h2><span class="typing-effect">Filtrage et Traduction d'Adresses (NAT)</span></h2>
+        <p>J'ai également configuré des règles de filtrage et de NAT sur le pare-feu pour sécuriser l'accès au réseau, tout en permettant une gestion fine des flux et de l'accès à Internet pour les différentes machines du réseau.</p>
+    </section>
+
+    <!-- Section: Réplication -->
+    <section id="replication">
+        <h2><span class="typing-effect">Réplication de Données</span></h2>
+        <p>La réplication de données a été un élément clé pour assurer la cohérence des services. J'ai mis en œuvre des solutions de réplication asynchrone et synchrone pour garantir que les données soient uniformément disponibles et à jour sur tous les serveurs.</p>
+    </section>
+
+    <footer>
+        <p>© 2025 Formation BTS SIO - Lycée René Descartes</p>
+    </footer>
+</body>
+</html>
