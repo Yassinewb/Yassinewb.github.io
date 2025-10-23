@@ -277,82 +277,9 @@
             .card {
                 padding: 15px;
             }
-            /* Popup modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    padding-top: 60px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    box-sizing: border-box;
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    color: #000;
-    border-radius: 10px;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
         }
     </style>
 </head>
-
-<!-- Modales (Popups) -->
-<div id="python" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('python')">&times;</span>
-        <h3>Python</h3>
-        <p>Python est un langage polyvalent utilisé dans divers domaines comme le développement web, l'automatisation des tâches, la science des données et l'intelligence artificielle. Il est connu pour sa simplicité et sa lisibilité.</p>
-    </div>
-</div>
-
-<div id="html" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('html')">&times;</span>
-        <h3>HTML</h3>
-        <p>HTML (HyperText Markup Language) est le langage de balisage standard utilisé pour structurer le contenu sur le web. C'est la base de toutes les pages web modernes et un élément essentiel du développement web.</p>
-    </div>
-</div>
-
-<div id="filezilla" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('filezilla')">&times;</span>
-        <h3>Filezilla</h3>
-        <p>FileZilla est un client FTP open-source qui permet de transférer des fichiers entre un ordinateur local et un serveur distant. Il supporte plusieurs protocoles tels que FTP, FTPS et SFTP.</p>
-    </div>
-</div>
-
-<div id="virtualbox" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('virtualbox')">&times;</span>
-        <h3>VirtualBox</h3>
-        <p>VirtualBox est un logiciel de virtualisation open-source qui permet de créer et de gérer des machines virtuelles. Cela permet de tester et d'exécuter plusieurs systèmes d'exploitation sur une seule machine physique.</p>
-    </div>
-</div>
-
 <body>
     <!-- Navigation Section -->
     <nav>
@@ -381,43 +308,59 @@
         <p>Je suis convaincu que l'informatique est un domaine en constante évolution, et je suis prêt à relever de nouveaux défis tout en contribuant à des projets de transformation numérique dans un environnement professionnel stimulant.</p>
     </section>
 
-<section id="skills">
-    <h2 class="section-title">Compétences</h2>
-    <div class="content-box">
-        <!-- Python Card -->
-        <div class="card">
-            <img src="icons8-python.gif" alt="Python">
-            <h3>Python</h3>
-            <p>Langage polyvalent utilisé pour le développement web, la science des données et l'automatisation.</p>
-            <button class="details-btn" onclick="openModal('python')">Détails</button>
-        </div>
-
-        <!-- HTML Card -->
-        <div class="card">
-            <img src="icons8-html.gif" alt="HTML">
-            <h3>HTML</h3>
-            <p>Langage utilisé pour structurer les pages web et leur contenu.</p>
-            <button class="details-btn" onclick="openModal('html')">Détails</button>
-        </div>
-
-        <!-- Filezilla Card -->
-        <div class="card">
-            <img src="icons8-filezilla-50.png" alt="Filezilla">
-            <h3>Filezilla</h3>
-            <p>FileZilla est un logiciel libre de transfert de fichiers FTP, SFTP et FTPS, utilisé pour envoyer ou recevoir des fichiers entre un ordinateur local et un serveur distant.</p>
-            <button class="details-btn" onclick="openModal('filezilla')">Détails</button>
-        </div>
-
-        <!-- VirtualBox Card -->
-        <div class="card">
-            <img src="icons8-virtualbox-50.png" alt="Virtualbox">
-            <h3>VirtualBox</h3>
-            <p>VirtualBox est un logiciel de virtualisation gratuit qui permet de créer et gérer des machines virtuelles.</p>
-            <button class="details-btn" onclick="openModal('virtualbox')">Détails</button>
+    <section id="skills">
+        <h2 class="section-title">Compétences</h2>
+        <div class="content-box">
+            <div class="card">
+                <img src="icons8-python.gif" alt="Python">
+                <h3>Python</h3>
+                <p>Langage polyvalent utilisé pour le développement web, la science des données et l'automatisation.</p>
+                <div style="margin-top: 20px;">
+                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        Détails
+                    </button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="icons8-html.gif" alt="HTML">
+                <h3>HTML</h3>
+                <p>Langage utilisé pour structurer les pages web et leur contenu.</p>
+                <div style="margin-top: 20px;">
+                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        Détails
+                    </button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="icons8-filezilla-50.png" alt="Filezilla">
+                <h3>Filezilla</h3>
+                <p>FileZilla est un logiciel libre de transfert de fichiers FTP, SFTP et FTPS, utilisé pour envoyer ou recevoir des fichiers entre un ordinateur local et un serveur distant.</p>
+                <div style="margin-top: 20px;">
+                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        Détails
+                    </button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="icons8-virtualbox-50.png" alt="Virtualbox">
+                <h3>Virtualbox</h3>
+                <p>VirtualBox est un logiciel de virtualisation gratuit qui permet de créer et gérer des machines virtuelles </p>
+                <div style="margin-top: 20px;">
+                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        Détails
+                    </button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="icons8-wireshark-logo.gif" alt="Wireshark" width="80">
+                <h3>Wireshark</h3>
+                <p>Analyseur de paquets réseau utilisé pour diagnostiquer et surveiller le trafic.</p>
+                <div style="margin-top: 20px;">
+                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        Détails
+                </button>
         </div>
     </div>
-</section>
-
 
 <div class="card">
     <img src="icons8-network.gif" alt="Packet tracer" width="80">
@@ -537,53 +480,5 @@
     <footer>
         <p>&copy; 2024 Yassine Boulahia - Tous droits réservés.</p>
     </footer>
-    <!-- ... Le reste de ton contenu HTML -->
-
-<!-- Modales (Popups) -->
-<div id="python" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('python')">&times;</span>
-        <h3>Python</h3>
-        <p>Python est un langage polyvalent utilisé dans divers domaines comme le développement web, l'automatisation des tâches, la science des données et l'intelligence artificielle. Il est connu pour sa simplicité et sa lisibilité.</p>
-    </div>
-</div>
-
-<div id="html" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('html')">&times;</span>
-        <h3>HTML</h3>
-        <p>HTML (HyperText Markup Language) est le langage de balisage standard utilisé pour structurer le contenu sur le web. C'est la base de toutes les pages web modernes et un élément essentiel du développement web.</p>
-    </div>
-</div>
-
-<div id="filezilla" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('filezilla')">&times;</span>
-        <h3>Filezilla</h3>
-        <p>FileZilla est un client FTP open-source qui permet de transférer des fichiers entre un ordinateur local et un serveur distant. Il supporte plusieurs protocoles tels que FTP, FTPS et SFTP.</p>
-    </div>
-</div>
-
-<div id="virtualbox" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('virtualbox')">&times;</span>
-        <h3>VirtualBox</h3>
-        <p>VirtualBox est un logiciel de virtualisation open-source qui permet de créer et de gérer des machines virtuelles. Cela permet de tester et d'exécuter plusieurs systèmes d'exploitation sur une seule machine physique.</p>
-    </div>
-</div>
-
-<!-- JavaScript pour ouvrir et fermer les modales -->
-<script>
-    // Fonction pour ouvrir la popup (modal)
-    function openModal(skill) {
-        document.getElementById(skill).style.display = "block";
-    }
-
-    // Fonction pour fermer la popup (modal)
-    function closeModal(skill) {
-        document.getElementById(skill).style.display = "none";
-    }
-</script>
-
-</body> <!-- Cette balise est correcte et fermée une seule fois. -->
+</body>
 </html>
