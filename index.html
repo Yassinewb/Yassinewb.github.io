@@ -110,6 +110,29 @@
             padding-top: 80px;
         }
 
+        .download-btn {
+            background-color: #ff5733;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            position: relative;
+        }
+
+        .download-btn:hover {
+            background-color: #e84e2b;
+        }
+
+        .download-btn {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 1100;
+        }
+
         /* Animations for text typing effect */
         .typing-effect {
             display: inline-block;
@@ -208,46 +231,128 @@
             margin-bottom: 20px;
         }
 
-        /* Popup modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            padding-top: 60px;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-            box-sizing: border-box;
+        /* Footer */
+        footer {
+            background-color: #121212;
+            padding: 40px 20px;
+            text-align: center;
+            color: #fff;
+            margin-top: 50px;
         }
 
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            color: #000;
-            border-radius: 10px;
+        footer p {
+            font-size: 1rem;
+            margin-bottom: 20px;
         }
 
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
+        footer .social-icons {
+            margin-top: 20px;
         }
 
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
+        footer .social-icons a {
+            color: #ff5733;
+            margin: 0 15px;
+            font-size: 1.6rem;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-icons a:hover {
+            color: #fff;
+        }
+
+        /* Mobile Responsiveness */
+        @media screen and (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .content-box {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .card {
+                padding: 15px;
+            }
+            /* Popup modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    color: #000;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
         }
     </style>
 </head>
+
+<!-- Modales (Popups) -->
+<div id="python" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('python')">&times;</span>
+        <h3>Python</h3>
+        <p>Python est un langage polyvalent utilisé dans divers domaines comme le développement web, l'automatisation des tâches, la science des données et l'intelligence artificielle. Il est connu pour sa simplicité et sa lisibilité.</p>
+    </div>
+</div>
+
+<div id="html" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('html')">&times;</span>
+        <h3>HTML</h3>
+        <p>HTML (HyperText Markup Language) est le langage de balisage standard utilisé pour structurer le contenu sur le web. C'est la base de toutes les pages web modernes et un élément essentiel du développement web.</p>
+    </div>
+</div>
+
+<div id="filezilla" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('filezilla')">&times;</span>
+        <h3>Filezilla</h3>
+        <p>FileZilla est un client FTP open-source qui permet de transférer des fichiers entre un ordinateur local et un serveur distant. Il supporte plusieurs protocoles tels que FTP, FTPS et SFTP.</p>
+    </div>
+</div>
+
+<div id="virtualbox" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('virtualbox')">&times;</span>
+        <h3>VirtualBox</h3>
+        <p>VirtualBox est un logiciel de virtualisation open-source qui permet de créer et de gérer des machines virtuelles. Cela permet de tester et d'exécuter plusieurs systèmes d'exploitation sur une seule machine physique.</p>
+    </div>
+</div>
+
 <body>
     <!-- Navigation Section -->
     <nav>
@@ -267,81 +372,218 @@
             </ul>
         </div>
     </nav>
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">À propos</h2>
+        <p>Je suis Yassine Boulahia, un étudiant dynamique et passionné par l'informatique, actuellement en BTS Services Informatiques aux Organisations (SIO). Mon parcours académique m'a permis d'acquérir une solide base de compétences techniques, allant de la gestion des réseaux informatiques à la programmation de solutions logicielles adaptées à divers besoins.</p>
+        <p>Mon objectif est d'approfondir mes connaissances en informatique, notamment en développement web, gestion de systèmes et cybersécurité. En parallèle, je cherche un stage dans le domaine pour mettre en pratique mes compétences et participer activement à des projets innovants et enrichissants.</p>
+        <p>Je suis particulièrement intéressé par l'optimisation des processus informatiques, la sécurisation des données et le développement de solutions numériques créatives. À travers mes projets, je m'efforce toujours d'allier efficacité technique et user experience (UX), en adoptant des solutions agiles et modernes.</p>
+        <p>Je suis convaincu que l'informatique est un domaine en constante évolution, et je suis prêt à relever de nouveaux défis tout en contribuant à des projets de transformation numérique dans un environnement professionnel stimulant.</p>
+    </section>
 
-    <!-- Skills Section -->
-    <section id="skills">
-        <h2 class="section-title">Compétences</h2>
-        <div class="content-box">
+<section id="skills">
+    <h2 class="section-title">Compétences</h2>
+    <div class="content-box">
+        <!-- Python Card -->
+        <div class="card">
+            <img src="icons8-python.gif" alt="Python">
+            <h3>Python</h3>
+            <p>Langage polyvalent utilisé pour le développement web, la science des données et l'automatisation.</p>
+            <button class="details-btn" onclick="openModal('python')">Détails</button>
+        </div>
+
+        <!-- HTML Card -->
+        <div class="card">
+            <img src="icons8-html.gif" alt="HTML">
+            <h3>HTML</h3>
+            <p>Langage utilisé pour structurer les pages web et leur contenu.</p>
+            <button class="details-btn" onclick="openModal('html')">Détails</button>
+        </div>
+
+        <!-- Filezilla Card -->
+        <div class="card">
+            <img src="icons8-filezilla-50.png" alt="Filezilla">
+            <h3>Filezilla</h3>
+            <p>FileZilla est un logiciel libre de transfert de fichiers FTP, SFTP et FTPS, utilisé pour envoyer ou recevoir des fichiers entre un ordinateur local et un serveur distant.</p>
+            <button class="details-btn" onclick="openModal('filezilla')">Détails</button>
+        </div>
+
+        <!-- VirtualBox Card -->
+        <div class="card">
+            <img src="icons8-virtualbox-50.png" alt="Virtualbox">
+            <h3>VirtualBox</h3>
+            <p>VirtualBox est un logiciel de virtualisation gratuit qui permet de créer et gérer des machines virtuelles.</p>
+            <button class="details-btn" onclick="openModal('virtualbox')">Détails</button>
+        </div>
+    </div>
+</section>
+
+
+<div class="card">
+    <img src="icons8-network.gif" alt="Packet tracer" width="80">
+    <h3>Cisco Packet Tracer</h3>
+    <p>Cisco Packet Tracer est un outil de simulation de réseau développé par Cisco Systems.</p>
+    <div style="margin-top: 20px;">
+        <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+            Détails
+        </button>
+    </div>
+</div>
+
             <div class="card">
-                <img src="icons8-python.gif" alt="Python">
-                <h3>Python</h3>
-                <p>Langage polyvalent utilisé pour le développement web, la science des données et l'automatisation.</p>
-                <button class="details-btn" onclick="openModal('python')">Détails</button>
+                <img src="https://cdn.icon-icons.com/icons2/2248/PNG/512/microsoft_visual_studio_code_icon_137397.png" alt="Visual Studio Code">
+                <h3>Visual Studio Code</h3>
+                <p>Éditeur de code extensible pour le développement web et la gestion de projet.</p>
+                <div style="margin-top: 20px;">
+                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        Détails
+                    </button>
+                </div>
             </div>
             <div class="card">
-                <img src="icons8-html.gif" alt="HTML">
-                <h3>HTML</h3>
-                <p>Langage utilisé pour structurer les pages web et leur contenu.</p>
-                <button class="details-btn" onclick="openModal('html')">Détails</button>
+                <img src="https://img.icons8.com/ios-filled/50/000000/cyber-security.png" alt="Cybersécurité">
+                <h3>Cybersécurité</h3>
+                <p>RGPD, bonnes pratiques, sécurisation des équipements et services.</p>
+                <div style="margin-top: 20px;">
+                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        Détails
+                    </button>
+                </div>
             </div>
             <div class="card">
-                <img src="icons8-filezilla-50.png" alt="Filezilla">
-                <h3>Filezilla</h3>
-                <p>FileZilla est un logiciel libre de transfert de fichiers FTP, SFTP et FTPS, utilisé pour envoyer ou recevoir des fichiers entre un ordinateur local et un serveur distant.</p>
-                <button class="details-btn" onclick="openModal('filezilla')">Détails</button>
-            </div>
-            <div class="card">
-                <img src="icons8-virtualbox-50.png" alt="Virtualbox">
-                <h3>Virtualbox</h3>
-                <p>VirtualBox est un logiciel de virtualisation gratuit qui permet de créer et gérer des machines virtuelles.</p>
-                <button class="details-btn" onclick="openModal('virtualbox')">Détails</button>
+                <img src="https://img.icons8.com/ios-filled/50/000000/arduino.png" alt="Arduino">
+                <h3>Arduino</h3>
+                <p>Plateforme de prototypage pour la création de circuits et objets électroniques programmables.</p>
+                <div style="margin-top: 20px;">
+                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        Détails
+                    </button>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Modal popups -->
-    <div id="python" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('python')">&times;</span>
-            <h3>Python</h3>
-            <p>Python est un langage polyvalent utilisé dans divers domaines tels que le développement web, la science des données, et l'automatisation. Il permet une grande flexibilité et simplicité, idéal pour les projets qui nécessitent rapidité et efficacité.</p>
+    <!-- Formation Section -->
+    <section id="formation">
+        <h2 class="section-title">Formation</h2>
+        <div class="content-box" style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; height: 200px;">
+                <div>
+                    <h3>Lycée René Descartes</h3>
+                    <p>BTS SIO (Service Informatique aux Organisations - Cybersécurité)</p>
+                    <small>2024 - 2026</small>
+                </div>
+                <button onclick="window.location.href='DESCARTES.html';" style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: auto;">
+                    S'informer
+                </button>
+            </div>
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; height: 200px;">
+                <div>
+                    <h3>Lycée Alfred Costes</h3>
+                    <p>Baccalauréat Professionnel SN (option RISC)</p>
+                    <small>2022 - 2024 - Mention Assez Bien</small>
+                </div>
+                <button onclick="window.location.href='ALFREDCOSTES.html';" style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: auto;">
+                    S'informer
+                </button>
+            </div>
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; height: 200px;">
+                <div>
+                    <h3>Collège Jean Moulin</h3>
+                    <p>Brevet des collèges</p>
+                    <small>2017 - 2021 - Mention Bien</small>
+                </div>
+                <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: auto;">
+                    S'informer
+                </button>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <div id="html" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('html')">&times;</span>
-            <h3>HTML</h3>
-            <p>HTML (HyperText Markup Language) est le langage standard utilisé pour structurer le contenu sur le web. Il permet de créer des pages web interactives et est la base de tout développement web moderne.</p>
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <h2 class="section-title">Expérience</h2>
+        <div class="content-box">
+            <div class="card">
+                <h3>Fibre Optique - MAF</h3>
+                <p>Vérification des signaux, soudure des fibres (2022-2023).</p>
+            </div>
+            <div class="card">
+                <h3>Vidéo Surveillance - VPS-Sitex</h3>
+                <p>Installation et maintenance de systèmes (2022-2023).</p>
+            </div>
+            <div class="card">
+                <h3>Dépannage Informatique</h3>
+                <p>Mac & PC : récupération de données (2023-2024).</p>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <div id="filezilla" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('filezilla')">&times;</span>
-            <h3>Filezilla</h3>
-            <p>FileZilla est un client FTP libre permettant de transférer des fichiers entre un ordinateur local et un serveur distant. Il prend en charge plusieurs protocoles, notamment FTP, SFTP, et FTPS, ce qui en fait un outil indispensable pour la gestion de serveurs.</p>
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Contact</h2>
+        <div class="card">
+            <h3>Contactez-moi</h3>
+            <p>Téléphone : 06.27.32.51.58</p>
+            <p>Email : <a href="mailto:bou.yassine@laposte.net">bou.yassine@laposte.net</a></p>
+            <div class="social-icons">
+                <a href="https://github.com/Yassinewb" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/yassine-boulahia-82535b258/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
         </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Yassine Boulahia - Tous droits réservés.</p>
+    </footer>
+    <!-- ... Le reste de ton contenu HTML -->
+
+<!-- Modales (Popups) -->
+<div id="python" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('python')">&times;</span>
+        <h3>Python</h3>
+        <p>Python est un langage polyvalent utilisé dans divers domaines comme le développement web, l'automatisation des tâches, la science des données et l'intelligence artificielle. Il est connu pour sa simplicité et sa lisibilité.</p>
     </div>
+</div>
 
-    <div id="virtualbox" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('virtualbox')">&times;</span>
-            <h3>Virtualbox</h3>
-            <p>VirtualBox est un logiciel de virtualisation open source qui permet de créer et de gérer des machines virtuelles. Idéal pour tester des systèmes d'exploitation et des logiciels sans affecter l'ordinateur principal.</p>
-        </div>
+<div id="html" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('html')">&times;</span>
+        <h3>HTML</h3>
+        <p>HTML (HyperText Markup Language) est le langage de balisage standard utilisé pour structurer le contenu sur le web. C'est la base de toutes les pages web modernes et un élément essentiel du développement web.</p>
     </div>
+</div>
 
-    <script>
-        // Open modal
-        function openModal(skill) {
-            document.getElementById(skill).style.display = "block";
-        }
+<div id="filezilla" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('filezilla')">&times;</span>
+        <h3>Filezilla</h3>
+        <p>FileZilla est un client FTP open-source qui permet de transférer des fichiers entre un ordinateur local et un serveur distant. Il supporte plusieurs protocoles tels que FTP, FTPS et SFTP.</p>
+    </div>
+</div>
 
-        // Close modal
-        function closeModal(skill) {
-            document.getElementById(skill).style.display = "none";
-        }
-    </script>
-</body>
+<div id="virtualbox" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('virtualbox')">&times;</span>
+        <h3>VirtualBox</h3>
+        <p>VirtualBox est un logiciel de virtualisation open-source qui permet de créer et de gérer des machines virtuelles. Cela permet de tester et d'exécuter plusieurs systèmes d'exploitation sur une seule machine physique.</p>
+    </div>
+</div>
+
+<!-- JavaScript pour ouvrir et fermer les modales -->
+<script>
+    // Fonction pour ouvrir la popup (modal)
+    function openModal(skill) {
+        document.getElementById(skill).style.display = "block";
+    }
+
+    // Fonction pour fermer la popup (modal)
+    function closeModal(skill) {
+        document.getElementById(skill).style.display = "none";
+    }
+</script>
+
+</body> <!-- Cette balise est correcte et fermée une seule fois. -->
 </html>
