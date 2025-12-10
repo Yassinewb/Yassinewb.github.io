@@ -3,10 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formation Lycée Alfred Costes</title>
+    <title>Yassine Boulahia - Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
+        /* --- Dark Mode (Défaut) --- */
+        :root {
+            --bg-color-dark: #121212;
+            --text-color-dark: #e0e0e0;
+            --nav-bg-dark: rgba(0, 0, 0, 0.9);
+            --card-bg-dark: #1c1c1c;
+            --highlight-color: #ff5733;
+            --shadow-color-dark: rgba(0, 0, 0, 0.6);
+        }
+
+        /* --- Light Mode Variables --- */
+        body.light-mode {
+            --bg-color-dark: #f0f0f0;
+            --text-color-dark: #121212;
+            --nav-bg-dark: rgba(255, 255, 255, 0.9);
+            --card-bg-dark: #ffffff;
+            --shadow-color-dark: rgba(0, 0, 0, 0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,9 +34,10 @@
 
         body {
             font-family: 'Roboto Mono', monospace;
-            background-color: #121212;
-            color: #e0e0e0;
+            background-color: var(--bg-color-dark);
+            color: var(--text-color-dark);
             overflow-x: hidden;
+            transition: background-color 0.5s, color 0.5s; /* Transition fluide */
         }
 
         /* Reset */
@@ -27,19 +47,20 @@
 
         /* Navigation bar */
         nav {
-            background: rgba(0, 0, 0, 0.9);
+            background: var(--nav-bg-dark);
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
             padding: 20px 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 4px 8px var(--shadow-color-dark);
+            transition: background-color 0.5s, box-shadow 0.5s;
         }
 
         .nav-container {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between; /* Ajustement pour le bouton de bascule */
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
@@ -47,19 +68,21 @@
         }
 
         .logo {
-            color: #fff;
+            color: var(--text-color-dark);
             font-size: 1.5em;
             font-weight: bold;
             animation: slideInFromLeft 2s ease-out;
             white-space: nowrap;
-            position: absolute;
-            left: 0;
-            padding-left: 20px;
+            transition: color 0.5s;
+        }
+        
+        body.light-mode .logo {
+            color: #121212;
         }
 
         .logo small {
             font-size: 0.6em;
-            color: #ff5733;
+            color: var(--highlight-color);
             animation: slideInFromLeft 2s ease-out 1s;
             display: block;
         }
@@ -81,17 +104,18 @@
             justify-content: center;
             padding: 0;
             margin: 0;
-            width: 100%;
+            flex-grow: 1; /* Permet à la liste de prendre de l'espace */
         }
-
+        
         nav ul li {
-            flex: 1;
+            flex: 0 1 auto;
             text-align: center;
+            margin: 0 10px; /* Ajout d'une marge pour ne pas être trop serré */
         }
 
         nav ul li a {
             text-decoration: none;
-            color: #fff;
+            color: var(--text-color-dark);
             font-weight: bold;
             padding: 10px 20px;
             border-radius: 30px;
@@ -100,9 +124,25 @@
         }
 
         nav ul li a:hover {
-            background: #ff5733;
+            background: var(--highlight-color);
             color: #fff;
             transform: scale(0.9);
+        }
+        
+        /* Ajustements pour le mode clair sur la nav */
+        body.light-mode nav ul li a {
+            color: #121212;
+        }
+
+        /* Ajout d'espace autour du logo pour ne pas chevaucher le reste */
+        .nav-container .logo {
+            margin-right: 50px;
+        }
+
+        /* Conteneur d'actions pour l'alignement du bouton de bascule */
+        .nav-actions {
+            display: flex;
+            align-items: center;
         }
 
         /* Adding space below navigation */
@@ -110,55 +150,20 @@
             padding-top: 80px;
         }
 
-        .download-btn {
-            background-color: #ff5733;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            position: relative;
+        /* Bouton de bascule */
+        #theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color-dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.3s;
+            margin-left: 20px;
         }
 
-        .download-btn:hover {
-            background-color: #e84e2b;
-        }
-
-        .download-btn {
-            position: absolute;
-            top: 50%;
-            right: 20px;
-            transform: translateY(-50%);
-            z-index: 1100;
-        }
-
-        /* Animations for text typing effect */
-        .typing-effect {
-            display: inline-block;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #ff5733;
-            border-right: 2px solid #ff5733;
-            white-space: nowrap;
-            overflow: hidden;
-            width: 0;
-            animation: typing 4s steps(30) 1s forwards, blink 0.75s step-end infinite;
-        }
-
-        @keyframes typing {
-            0% {
-                width: 0;
-            }
-            100% {
-                width: 100%;
-            }
-        }
-
-        @keyframes blink {
-            50% {
-                border-color: transparent;
-            }
+        #theme-toggle:hover {
+            color: var(--highlight-color);
         }
 
         /* Main content sections */
@@ -170,7 +175,7 @@
         }
 
         section h2 {
-            color: #ff5733;
+            color: var(--highlight-color);
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 30px;
@@ -187,7 +192,7 @@
             transform: translateX(-50%);
             width: 50px;
             height: 4px;
-            background: #ff5733;
+            background: var(--highlight-color);
             border-radius: 50px;
             animation: pulse 1.2s infinite alternate;
         }
@@ -209,19 +214,23 @@
         }
 
         .card {
-            background-color: #1c1c1c;
+            background-color: var(--card-bg-dark);
             padding: 20px;
             border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px var(--shadow-color-dark);
             text-align: center;
             position: relative;
-            transition: transform 0.3s ease-in-out;
-            color: #fff;
+            transition: transform 0.3s ease-in-out, background-color 0.5s, box-shadow 0.5s, color 0.5s;
+            color: var(--text-color-dark);
         }
 
         .card:hover {
             transform: translateY(-15px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); 
+        }
+        
+        .card h3 {
+             color: var(--highlight-color);
         }
 
         .card img {
@@ -231,13 +240,28 @@
             margin-bottom: 20px;
         }
 
+        .card button {
+            background-color: var(--highlight-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .card button:hover {
+            background-color: #e84e2b;
+        }
+
         /* Footer */
         footer {
-            background-color: #121212;
+            background-color: var(--bg-color-dark);
             padding: 40px 20px;
             text-align: center;
-            color: #fff;
+            color: var(--text-color-dark);
             margin-top: 50px;
+            transition: background-color 0.5s, color 0.5s;
         }
 
         footer p {
@@ -250,20 +274,44 @@
         }
 
         footer .social-icons a {
-            color: #ff5733;
+            color: var(--highlight-color);
             margin: 0 15px;
             font-size: 1.6rem;
             transition: color 0.3s ease;
         }
 
         footer .social-icons a:hover {
-            color: #fff;
+            color: var(--text-color-dark);
         }
 
         /* Mobile Responsiveness */
         @media screen and (max-width: 768px) {
             nav ul {
                 flex-direction: column;
+                margin-top: 10px;
+            }
+            
+            nav {
+                padding: 10px 0;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .logo {
+                margin-bottom: 10px;
+            }
+            
+            .nav-actions {
+                 position: absolute;
+                 top: 10px;
+                 right: 10px;
+            }
+            
+            nav ul li {
+                margin: 5px 0;
             }
 
             section h2 {
@@ -271,7 +319,7 @@
             }
 
             .content-box {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
             }
 
             .card {
@@ -281,13 +329,13 @@
     </style>
 </head>
 <body>
-    <!-- Navigation Section -->
     <nav>
         <div class="nav-container">
             <div class="logo">
                 Yassine Boulahia
                 <br><small>Étudiant en BTS SIO</small>
             </div>
+            
             <ul>
                 <li><a href="#about">À propos</a></li>
                 <li><a href="#skills">Compétences</a></li>
@@ -297,9 +345,14 @@
                 <li><a href="veille.html">Veille technologique</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            
+            <div class="nav-actions">
+                <button id="theme-toggle" aria-label="Basculer le mode sombre/clair">
+                    <i class="fas fa-sun"></i> 
+                </button>
+            </div>
         </div>
     </nav>
-    <!-- About Section -->
     <section id="about">
         <h2 class="section-title">À propos</h2>
         <p>Je suis Yassine Boulahia, un étudiant dynamique et passionné par l'informatique, actuellement en BTS Services Informatiques aux Organisations (SIO). Mon parcours académique m'a permis d'acquérir une solide base de compétences techniques, allant de la gestion des réseaux informatiques à la programmation de solutions logicielles adaptées à divers besoins.</p>
@@ -316,9 +369,7 @@
                 <h3>Python</h3>
                 <p>Langage polyvalent utilisé pour le développement web, la science des données et l'automatisation.</p>
                 <div style="margin-top: 20px;">
-                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                        Détails
-                    </button>
+                    <button>Détails</button>
                 </div>
             </div>
             <div class="card">
@@ -326,9 +377,7 @@
                 <h3>HTML</h3>
                 <p>Langage utilisé pour structurer les pages web et leur contenu.</p>
                 <div style="margin-top: 20px;">
-                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                        Détails
-                    </button>
+                    <button>Détails</button>
                 </div>
             </div>
             <div class="card">
@@ -336,9 +385,7 @@
                 <h3>Filezilla</h3>
                 <p>FileZilla est un logiciel libre de transfert de fichiers FTP, SFTP et FTPS, utilisé pour envoyer ou recevoir des fichiers entre un ordinateur local et un serveur distant.</p>
                 <div style="margin-top: 20px;">
-                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                        Détails
-                    </button>
+                    <button>Détails</button>
                 </div>
             </div>
             <div class="card">
@@ -346,9 +393,7 @@
                 <h3>Virtualbox</h3>
                 <p>VirtualBox est un logiciel de virtualisation gratuit qui permet de créer et gérer des machines virtuelles </p>
                 <div style="margin-top: 20px;">
-                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                        Détails
-                    </button>
+                    <button>Détails</button>
                 </div>
             </div>
             <div class="card">
@@ -356,31 +401,25 @@
                 <h3>Wireshark</h3>
                 <p>Analyseur de paquets réseau utilisé pour diagnostiquer et surveiller le trafic.</p>
                 <div style="margin-top: 20px;">
-                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                        Détails
-                </button>
-        </div>
-    </div>
+                    <button>Détails</button>
+                </div>
+            </div>
 
-<div class="card">
-    <img src="icons8-network.gif" alt="Packet tracer" width="80">
-    <h3>Cisco Packet Tracer</h3>
-    <p>Cisco Packet Tracer est un outil de simulation de réseau développé par Cisco Systems.</p>
-    <div style="margin-top: 20px;">
-        <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-            Détails
-        </button>
-    </div>
-</div>
+            <div class="card">
+                <img src="icons8-network.gif" alt="Packet tracer" width="80">
+                <h3>Cisco Packet Tracer</h3>
+                <p>Cisco Packet Tracer est un outil de simulation de réseau développé par Cisco Systems.</p>
+                <div style="margin-top: 20px;">
+                    <button>Détails</button>
+                </div>
+            </div>
 
             <div class="card">
                 <img src="https://cdn.icon-icons.com/icons2/2248/PNG/512/microsoft_visual_studio_code_icon_137397.png" alt="Visual Studio Code">
                 <h3>Visual Studio Code</h3>
                 <p>Éditeur de code extensible pour le développement web et la gestion de projet.</p>
                 <div style="margin-top: 20px;">
-                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                        Détails
-                    </button>
+                    <button>Détails</button>
                 </div>
             </div>
             <div class="card">
@@ -388,9 +427,7 @@
                 <h3>Cybersécurité</h3>
                 <p>RGPD, bonnes pratiques, sécurisation des équipements et services.</p>
                 <div style="margin-top: 20px;">
-                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                        Détails
-                    </button>
+                    <button>Détails</button>
                 </div>
             </div>
             <div class="card">
@@ -398,15 +435,12 @@
                 <h3>Arduino</h3>
                 <p>Plateforme de prototypage pour la création de circuits et objets électroniques programmables.</p>
                 <div style="margin-top: 20px;">
-                    <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                        Détails
-                    </button>
+                    <button>Détails</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Formation Section -->
     <section id="formation">
         <h2 class="section-title">Formation</h2>
         <div class="content-box" style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
@@ -416,7 +450,7 @@
                     <p>BTS SIO (Service Informatique aux Organisations - Cybersécurité)</p>
                     <small>2024 - 2026</small>
                 </div>
-                <button onclick="window.location.href='DESCARTES.html';" style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: auto;">
+                <button onclick="window.location.href='DESCARTES.html';">
                     S'informer
                 </button>
             </div>
@@ -426,7 +460,7 @@
                     <p>Baccalauréat Professionnel SN (option RISC)</p>
                     <small>2022 - 2024 - Mention Assez Bien</small>
                 </div>
-                <button onclick="window.location.href='ALFREDCOSTES.html';" style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: auto;">
+                <button onclick="window.location.href='ALFREDCOSTES.html';">
                     S'informer
                 </button>
             </div>
@@ -436,14 +470,13 @@
                     <p>Brevet des collèges</p>
                     <small>2017 - 2021 - Mention Bien</small>
                 </div>
-                <button style="background-color: #ff5733; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: auto;">
+                <button>
                     S'informer
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- Portfolio Section -->
     <section id="portfolio">
         <h2 class="section-title">Expérience</h2>
         <div class="content-box">
@@ -462,7 +495,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact">
         <h2 class="section-title">Contact</h2>
         <div class="card">
@@ -476,9 +508,53 @@
         </div>
     </section>
 
-    <!-- Footer Section -->
     <footer>
         <p>&copy; 2024 Yassine Boulahia - Tous droits réservés.</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const icon = themeToggle.querySelector('i');
+            
+            // Fonction pour appliquer le thème
+            function applyTheme(theme) {
+                if (theme === 'light') {
+                    body.classList.add('light-mode');
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    body.classList.remove('light-mode');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                    localStorage.setItem('theme', 'dark');
+                }
+            }
+
+            // Vérifier la préférence stockée au chargement
+            const storedTheme = localStorage.getItem('theme');
+            if (storedTheme) {
+                applyTheme(storedTheme);
+            } else {
+                // Thème par défaut basé sur le système (si non stocké)
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                    applyTheme('light');
+                } else {
+                    applyTheme('dark');
+                }
+            }
+            
+            // Écouteur d'événement pour le bouton de bascule
+            themeToggle.addEventListener('click', () => {
+                if (body.classList.contains('light-mode')) {
+                    applyTheme('dark');
+                } else {
+                    applyTheme('light');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
