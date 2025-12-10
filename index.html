@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        /* --- Dark Mode (Défaut) --- */
+        /* --- VARIABLES DE THÈME --- */
         :root {
             --bg-color-dark: #121212;
             --text-color-dark: #e0e0e0;
@@ -15,6 +15,8 @@
             --card-bg-dark: #1c1c1c;
             --highlight-color: #ff5733;
             --shadow-color-dark: rgba(0, 0, 0, 0.6);
+            --modal-bg-color: rgba(0, 0, 0, 0.8);
+            --modal-content-bg: #1c1c1c;
         }
 
         /* --- Light Mode Variables --- */
@@ -24,6 +26,8 @@
             --nav-bg-dark: rgba(255, 255, 255, 0.9);
             --card-bg-dark: #ffffff;
             --shadow-color-dark: rgba(0, 0, 0, 0.1);
+            --modal-bg-color: rgba(0, 0, 0, 0.5);
+            --modal-content-bg: #ffffff;
         }
 
         * {
@@ -37,7 +41,13 @@
             background-color: var(--bg-color-dark);
             color: var(--text-color-dark);
             overflow-x: hidden;
-            transition: background-color 0.5s, color 0.5s; /* Transition fluide */
+            transition: background-color 0.5s, color 0.5s; 
+            padding-top: 80px; 
+        }
+        
+        /* Cacher le défilement du corps quand la modale est ouverte */
+        body.modal-open {
+            overflow: hidden;
         }
 
         /* Reset */
@@ -60,7 +70,7 @@
         .nav-container {
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Ajustement pour le bouton de bascule */
+            justify-content: space-between; 
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
@@ -104,13 +114,13 @@
             justify-content: center;
             padding: 0;
             margin: 0;
-            flex-grow: 1; /* Permet à la liste de prendre de l'espace */
+            flex-grow: 1; 
         }
         
         nav ul li {
             flex: 0 1 auto;
             text-align: center;
-            margin: 0 10px; /* Ajout d'une marge pour ne pas être trop serré */
+            margin: 0 10px; 
         }
 
         nav ul li a {
@@ -143,11 +153,6 @@
         .nav-actions {
             display: flex;
             align-items: center;
-        }
-
-        /* Adding space below navigation */
-        body {
-            padding-top: 80px;
         }
 
         /* Bouton de bascule */
@@ -283,6 +288,74 @@
         footer .social-icons a:hover {
             color: var(--text-color-dark);
         }
+        
+        /* --- Styles de la Modale --- */
+        .modal {
+            display: none; /* Caché par défaut */
+            position: fixed;
+            z-index: 2000; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: var(--modal-bg-color); /* Fond semi-transparent */
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            background-color: var(--modal-content-bg);
+            margin: 10% auto; /* 10% du haut et centré horizontalement */
+            padding: 40px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 15px 40px var(--shadow-color-dark);
+            position: relative;
+            animation: slideIn 0.4s ease-out;
+            color: var(--text-color-dark);
+        }
+
+        .close-btn {
+            color: var(--text-color-dark);
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 30px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: var(--highlight-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .modal-content h3 {
+            font-size: 2rem;
+            color: var(--highlight-color);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--highlight-color);
+            padding-bottom: 10px;
+        }
+        
+        .modal-content p {
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        @keyframes slideIn {
+            from {transform: translate(-50%, -50%) scale(0.9);}
+            to {transform: translate(-50%, 0) scale(1);}
+        }
 
         /* Mobile Responsiveness */
         @media screen and (max-width: 768px) {
@@ -325,6 +398,11 @@
             .card {
                 padding: 15px;
             }
+            
+            .modal-content {
+                width: 90%;
+                margin: 20% auto;
+            }
         }
     </style>
 </head>
@@ -364,78 +442,103 @@
     <section id="skills">
         <h2 class="section-title">Compétences</h2>
         <div class="content-box">
-            <div class="card">
+            
+            <div class="card" 
+                 data-title="Python : Polyvalence et Automatisation" 
+                 data-description="Python est le langage que j'utilise le plus pour l'automatisation des tâches (scripting) et le développement de petites applications. Ses librairies variées me permettent d'interagir facilement avec les systèmes d'exploitation et les réseaux. J'ai notamment utilisé Python pour la gestion de fichiers, l'analyse de logs et des scripts de surveillance réseau.">
                 <img src="icons8-python.gif" alt="Python">
                 <h3>Python</h3>
                 <p>Langage polyvalent utilisé pour le développement web, la science des données et l'automatisation.</p>
                 <div style="margin-top: 20px;">
-                    <button>Détails</button>
+                    <button class="detail-btn">Détails</button>
                 </div>
             </div>
-            <div class="card">
+            
+            <div class="card"
+                 data-title="HTML & CSS : Fondations du Web"
+                 data-description="Je maîtrise HTML pour structurer le contenu web (comme ce portfolio) et CSS pour le styliser et le rendre adaptatif (responsive design). Ces compétences sont fondamentales pour toute intervention en développement web ou pour la création d'interfaces utilisateur professionnelles.">
                 <img src="icons8-html.gif" alt="HTML">
                 <h3>HTML</h3>
                 <p>Langage utilisé pour structurer les pages web et leur contenu.</p>
                 <div style="margin-top: 20px;">
-                    <button>Détails</button>
+                    <button class="detail-btn">Détails</button>
                 </div>
             </div>
-            <div class="card">
+            
+            <div class="card"
+                 data-title="Filezilla : Transfert Sécurisé de Fichiers"
+                 data-description="Je suis habitué à utiliser FileZilla et d'autres clients FTP/SFTP. Cela me permet de gérer et de transférer des fichiers en toute sécurité vers et depuis des serveurs distants, une compétence essentielle pour la mise à jour et la maintenance de sites web et d'applications hébergées.">
                 <img src="icons8-filezilla-50.png" alt="Filezilla">
                 <h3>Filezilla</h3>
                 <p>FileZilla est un logiciel libre de transfert de fichiers FTP, SFTP et FTPS, utilisé pour envoyer ou recevoir des fichiers entre un ordinateur local et un serveur distant.</p>
                 <div style="margin-top: 20px;">
-                    <button>Détails</button>
+                    <button class="detail-btn">Détails</button>
                 </div>
             </div>
-            <div class="card">
+            
+            <div class="card"
+                 data-title="Virtualbox : Environnements Virtuels"
+                 data-description="J'utilise VirtualBox pour créer et gérer des machines virtuelles (VM). Cela est crucial pour tester des configurations réseau, des systèmes d'exploitation ou des logiciels dans un environnement isolé sans affecter ma machine hôte. Je peux ainsi simuler des réseaux complexes pour l'apprentissage et le dépannage.">
                 <img src="icons8-virtualbox-50.png" alt="Virtualbox">
                 <h3>Virtualbox</h3>
                 <p>VirtualBox est un logiciel de virtualisation gratuit qui permet de créer et gérer des machines virtuelles </p>
                 <div style="margin-top: 20px;">
-                    <button>Détails</button>
+                    <button class="detail-btn">Détails</button>
                 </div>
             </div>
-            <div class="card">
+            
+            <div class="card"
+                 data-title="Wireshark : Analyse de Paquets Réseau"
+                 data-description="Maîtrise de Wireshark pour l'inspection et l'analyse du trafic réseau en temps réel. Cette compétence est indispensable pour diagnostiquer des problèmes de performance, identifier des failles de sécurité, ou comprendre le fonctionnement précis des protocoles réseau.">
                 <img src="icons8-wireshark-logo.gif" alt="Wireshark" width="80">
                 <h3>Wireshark</h3>
                 <p>Analyseur de paquets réseau utilisé pour diagnostiquer et surveiller le trafic.</p>
                 <div style="margin-top: 20px;">
-                    <button>Détails</button>
+                    <button class="detail-btn">Détails</button>
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card"
+                 data-title="Cisco Packet Tracer : Simulation Réseau"
+                 data-description="J'utilise Cisco Packet Tracer pour concevoir, construire et simuler des architectures réseau complexes sans matériel physique. Cela inclut la configuration de routeurs, de commutateurs et la mise en œuvre de protocoles de routage (comme OSPF ou EIGRP), ce qui consolide mes connaissances en administration réseau.">
                 <img src="icons8-network.gif" alt="Packet tracer" width="80">
                 <h3>Cisco Packet Tracer</h3>
                 <p>Cisco Packet Tracer est un outil de simulation de réseau développé par Cisco Systems.</p>
                 <div style="margin-top: 20px;">
-                    <button>Détails</button>
+                    <button class="detail-btn">Détails</button>
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card"
+                 data-title="Visual Studio Code : Environnement de Développement"
+                 data-description="VS Code est mon éditeur de code préféré. J'utilise ses nombreuses extensions pour le développement rapide, le débogage et la gestion de projet. Il me permet de travailler efficacement sur divers langages (Python, HTML, CSS, JavaScript) dans un environnement unifié.">
                 <img src="https://cdn.icon-icons.com/icons2/2248/PNG/512/microsoft_visual_studio_code_icon_137397.png" alt="Visual Studio Code">
                 <h3>Visual Studio Code</h3>
                 <p>Éditeur de code extensible pour le développement web et la gestion de projet.</p>
                 <div style="margin-top: 20px;">
-                    <button>Détails</button>
+                    <button class="detail-btn">Détails</button>
                 </div>
             </div>
-            <div class="card">
+            
+            <div class="card"
+                 data-title="Cybersécurité : Sécurisation des Systèmes"
+                 data-description="Connaissance des bonnes pratiques de sécurité, incluant le RGPD, la sécurisation des postes de travail et des serveurs, et la mise en place de politiques d'accès. J'ai notamment travaillé sur l'analyse de vulnérabilités, le filtrage par pare-feu, et la gestion des identités et des accès (IAM).">
                 <img src="https://img.icons8.com/ios-filled/50/000000/cyber-security.png" alt="Cybersécurité">
                 <h3>Cybersécurité</h3>
                 <p>RGPD, bonnes pratiques, sécurisation des équipements et services.</p>
                 <div style="margin-top: 20px;">
-                    <button>Détails</button>
+                    <button class="detail-btn">Détails</button>
                 </div>
             </div>
-            <div class="card">
+            
+            <div class="card"
+                 data-title="Arduino : Systèmes Embarqués et Prototypage"
+                 data-description="Expérience dans l'utilisation de la plateforme Arduino pour le prototypage rapide de circuits électroniques programmables. J'ai développé des projets incluant la lecture de capteurs et le contrôle d'actionneurs, utiles pour des solutions d'Internet des Objets (IoT) ou l'automatisation physique.">
                 <img src="https://img.icons8.com/ios-filled/50/000000/arduino.png" alt="Arduino">
                 <h3>Arduino</h3>
                 <p>Plateforme de prototypage pour la création de circuits et objets électroniques programmables.</p>
                 <div style="margin-top: 20px;">
-                    <button>Détails</button>
+                    <button class="detail-btn">Détails</button>
                 </div>
             </div>
         </div>
@@ -470,9 +573,6 @@
                     <p>Brevet des collèges</p>
                     <small>2017 - 2021 - Mention Bien</small>
                 </div>
-                <button>
-                    S'informer
-                </button>
             </div>
         </div>
     </section>
@@ -481,16 +581,20 @@
         <h2 class="section-title">Expérience</h2>
         <div class="content-box">
             <div class="card">
-                <h3>Fibre Optique - MAF</h3>
+                <h3>Stage Fibre Optique - MAF</h3>
                 <p>Vérification des signaux, soudure des fibres (2022-2023).</p>
             </div>
             <div class="card">
-                <h3>Vidéo Surveillance - VPS-Sitex</h3>
+                <h3>Stage Vidéo Surveillance - VPS-Sitex</h3>
                 <p>Installation et maintenance de systèmes (2022-2023).</p>
             </div>
             <div class="card">
-                <h3>Dépannage Informatique</h3>
-                <p>Mac & PC : récupération de données (2023-2024).</p>
+                <h3>Stage Dépannage Informatique</h3>
+                <p>Mac & PC : récupération de données (2023-2024) (2024-2025).</p>
+            </div>
+            <div class="card">
+                <h3>Stage Administrateur Réseau</h3>
+                <p>Hotel Radisson Blu - Djerba (2025 - 2026)</p>
             </div>
         </div>
     </section>
@@ -512,13 +616,22 @@
         <p>&copy; 2024 Yassine Boulahia - Tous droits réservés.</p>
     </footer>
 
+    <div id="skill-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3 id="modal-title">Titre de la Compétence</h3>
+            <p id="modal-description">Description détaillée...</p>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
+            
+            // --- GESTION DU MODE SOMBRE/CLAIR ---
             const themeToggle = document.getElementById('theme-toggle');
             const body = document.body;
             const icon = themeToggle.querySelector('i');
             
-            // Fonction pour appliquer le thème
             function applyTheme(theme) {
                 if (theme === 'light') {
                     body.classList.add('light-mode');
@@ -533,12 +646,10 @@
                 }
             }
 
-            // Vérifier la préférence stockée au chargement
             const storedTheme = localStorage.getItem('theme');
             if (storedTheme) {
                 applyTheme(storedTheme);
             } else {
-                // Thème par défaut basé sur le système (si non stocké)
                 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
                     applyTheme('light');
                 } else {
@@ -546,12 +657,60 @@
                 }
             }
             
-            // Écouteur d'événement pour le bouton de bascule
             themeToggle.addEventListener('click', () => {
                 if (body.classList.contains('light-mode')) {
                     applyTheme('dark');
                 } else {
                     applyTheme('light');
+                }
+            });
+            
+            // --- GESTION DE LA MODALE DES COMPÉTENCES ---
+            const modal = document.getElementById('skill-modal');
+            const closeBtn = document.querySelector('.close-btn');
+            const skillCards = document.querySelectorAll('.card');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+
+            // 1. Ouvre la modale et charge le contenu
+            skillCards.forEach(card => {
+                const detailButton = card.querySelector('.detail-btn');
+                if (detailButton) {
+                    detailButton.addEventListener('click', () => {
+                        // Récupère les données de la carte
+                        const title = card.getAttribute('data-title');
+                        const description = card.getAttribute('data-description');
+
+                        // Met à jour le contenu de la modale
+                        modalTitle.textContent = title;
+                        modalDescription.textContent = description;
+
+                        // Affiche la modale et bloque le défilement du corps
+                        modal.style.display = "block";
+                        body.classList.add('modal-open');
+                    });
+                }
+            });
+
+            // 2. Ferme la modale (bouton X)
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = "none";
+                body.classList.remove('modal-open');
+            });
+
+            // 3. Ferme la modale (clic en dehors)
+            window.addEventListener('click', (event) => {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                    body.classList.remove('modal-open');
+                }
+            });
+            
+            // 4. Ferme la modale (touche Échap)
+            document.addEventListener('keydown', (event) => {
+                if (event.key === "Escape" && modal.style.display === "block") {
+                    modal.style.display = "none";
+                    body.classList.remove('modal-open');
                 }
             });
         });
