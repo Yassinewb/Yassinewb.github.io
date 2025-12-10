@@ -5,7 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formation Lycée Alfred Costes</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
+        /* --- VARIABLES DE THÈME --- */
+        :root {
+            /* Dark Mode (Défaut) */
+            --bg-color-dark: #121212;
+            --text-color-dark: #e0e0e0;
+            --nav-bg-dark: #1c1c1c;
+            --highlight-color: #ff5733;
+            --shadow-color-dark: rgba(0, 0, 0, 0.6);
+            --card-bg-dark: #1c1c1c;
+        }
+
+        /* Light Mode */
+        body.light-mode {
+            --bg-color-dark: #f0f0f0;
+            --text-color-dark: #121212;
+            --nav-bg-dark: #ffffff;
+            --shadow-color-dark: rgba(0, 0, 0, 0.1);
+            --card-bg-dark: #ffffff;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,9 +35,11 @@
 
         body {
             font-family: 'Roboto Mono', monospace;
-            background-color: #121212;
-            color: #e0e0e0;
+            background-color: var(--bg-color-dark);
+            color: var(--text-color-dark);
             overflow-x: hidden;
+            transition: background-color 0.5s, color 0.5s;
+            padding-top: 80px; /* Espace pour la barre de navigation fixe */
         }
 
         /* Reset */
@@ -30,29 +53,40 @@
             top: 0;
             left: 0;
             right: 0;
-            background-color: #1c1c1c;
-            padding: 20px;
+            background-color: var(--nav-bg-dark);
+            padding: 20px 0;
             z-index: 1000;
             text-align: center;
+            box-shadow: 0 2px 5px var(--shadow-color-dark);
+            transition: background-color 0.5s, box-shadow 0.5s;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative; /* Pour positionner le bouton de bascule */
         }
 
         nav ul {
             display: flex;
             justify-content: center;
             gap: 30px;
-        }
-
-        nav ul li {
             list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
         nav ul li a {
             text-decoration: none;
-            color: #ff5733;
+            color: var(--highlight-color);
             font-size: 1.2rem;
             font-weight: 600;
             position: relative;
-            padding: 10px;
+            padding: 10px 0;
             transition: color 0.3s ease;
         }
 
@@ -63,7 +97,7 @@
             left: 0;
             width: 100%;
             height: 3px;
-            background-color: #ff5733;
+            background-color: var(--highlight-color);
             transform: scaleX(0);
             transform-origin: bottom right;
             transition: transform 0.25s ease-out;
@@ -75,7 +109,29 @@
         }
 
         nav ul li a:hover {
-            color: #fff;
+            color: var(--text-color-dark);
+        }
+        
+        /* Ajustement du texte des liens pour le mode clair */
+        body.light-mode nav ul li a:hover {
+            color: #121212;
+        }
+        
+        /* Bouton de bascule de thème */
+        #theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color-dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.3s;
+            position: absolute;
+            right: 20px;
+        }
+
+        #theme-toggle:hover {
+            color: var(--highlight-color);
         }
 
         /* Animations for text typing effect */
@@ -83,8 +139,8 @@
             display: inline-block;
             font-size: 1.8rem;
             font-weight: 700;
-            color: #ff5733;
-            border-right: 2px solid #ff5733;
+            color: var(--highlight-color);
+            border-right: 2px solid var(--highlight-color);
             white-space: nowrap;
             overflow: hidden;
             width: 0;
@@ -115,7 +171,7 @@
         }
 
         section h2 {
-            color: #ff5733;
+            color: var(--highlight-color);
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 30px;
@@ -132,7 +188,7 @@
             transform: translateX(-50%);
             width: 50px;
             height: 4px;
-            background: #ff5733;
+            background: var(--highlight-color);
             border-radius: 50px;
             animation: pulse 1.2s infinite alternate;
         }
@@ -154,19 +210,23 @@
         }
 
         .card {
-            background-color: #1c1c1c;
+            background-color: var(--card-bg-dark);
             padding: 20px;
             border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px var(--shadow-color-dark);
             text-align: center;
             position: relative;
-            transition: transform 0.3s ease-in-out;
-            color: #fff;
+            transition: transform 0.3s ease-in-out, background-color 0.5s, box-shadow 0.5s;
+            color: var(--text-color-dark);
         }
 
         .card:hover {
             transform: translateY(-15px);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+        
+        .card h3 {
+             color: var(--highlight-color);
         }
 
         .card img {
@@ -174,15 +234,18 @@
             height: 80px;
             border-radius: 50%;
             margin-bottom: 20px;
+            background-color: var(--bg-color-dark); /* Empêche les icônes de se fondre dans le fond clair */
+            padding: 5px;
         }
 
         /* Footer */
         footer {
-            background-color: #121212;
+            background-color: var(--nav-bg-dark);
             padding: 40px 20px;
             text-align: center;
-            color: #fff;
+            color: var(--text-color-dark);
             margin-top: 50px;
+            transition: background-color 0.5s, color 0.5s;
         }
 
         footer p {
@@ -190,25 +253,26 @@
             margin-bottom: 20px;
         }
 
-        footer .social-icons {
-            margin-top: 20px;
-        }
-
-        footer .social-icons a {
-            color: #ff5733;
-            margin: 0 15px;
-            font-size: 1.6rem;
-            transition: color 0.3s ease;
-        }
-
-        footer .social-icons a:hover {
-            color: #fff;
-        }
-
         /* Mobile Responsiveness */
         @media screen and (max-width: 768px) {
+            .nav-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            
             nav ul {
                 flex-direction: column;
+                gap: 10px;
+                margin-top: 10px;
+            }
+            
+            nav ul li a {
+                font-size: 1rem;
+            }
+            
+            #theme-toggle {
+                position: static;
+                margin-top: 10px;
             }
 
             section h2 {
@@ -216,7 +280,7 @@
             }
 
             .content-box {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
             }
 
             .card {
@@ -227,36 +291,36 @@
 </head>
 <body>
 
-    <!-- Navigation -->
     <nav>
-        <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="#packet-tracer">Cisco Packet Tracer</a></li>
-            <li><a href="#adressage">Adressage Réseau</a></li>
-            <li><a href="#programmation">Langages</a></li>
-            <li><a href="#configuration">Configuration Réseau</a></li>
-        </ul>
+        <div class="nav-content">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="#packet-tracer">Cisco Packet Tracer</a></li>
+                <li><a href="#adressage">Adressage Réseau</a></li>
+                <li><a href="#programmation">Langages</a></li>
+                <li><a href="#configuration">Configuration Réseau</a></li>
+            </ul>
+            <button id="theme-toggle" aria-label="Basculer le mode sombre/clair">
+                <i class="fas fa-sun"></i> 
+            </button>
+        </div>
     </nav>
 
-    <!-- Section: Cisco Packet Tracer -->
     <section id="packet-tracer">
         <h2><span class="typing-effect">Cisco Packet Tracer</span></h2>
         <p>Au cours de ma formation, j'ai eu l'occasion de travailler avec le logiciel Cisco Packet Tracer, un simulateur de réseaux développé par Cisco. Cet outil m'a permis de concevoir, tester et analyser des réseaux sans avoir besoin de matériel physique. J'ai pu simuler des infrastructures complexes, configurer des routeurs, des commutateurs et des serveurs afin de mieux comprendre le fonctionnement d'un réseau informatique. Grâce à Cisco Packet Tracer, j'ai acquis des compétences solides dans la gestion des réseaux, de la création de VLAN à la gestion des protocoles de routage.</p>
     </section>
 
-    <!-- Section: Adressage Réseau -->
     <section id="adressage">
         <h2><span class="typing-effect">Adressage Réseau</span></h2>
         <p>L'adressage réseau est essentiel pour organiser et gérer les réseaux informatiques. Pendant ma formation, j'ai appris à attribuer des adresses IP aux différents équipements d'un réseau. Cela inclut la gestion des sous-réseaux pour optimiser l'utilisation des adresses disponibles. Grâce à la compréhension de la notion de masques de sous-réseau, j'ai pu diviser un réseau en sous-réseaux plus petits, ce qui améliore la sécurité et les performances. La gestion des plages d'adresses, la configuration du DHCP et l'attribution des adresses statiques sont devenues des tâches courantes que j'ai maîtrisées au fil de ma formation.</p>
     </section>
 
-    <!-- Section: Configuration Réseau -->
     <section id="configuration">
         <h2><span class="typing-effect">Configuration Réseau</span></h2>
         <p>Dans cette section, j'ai exploré différentes techniques de configuration de réseaux, y compris la création et la gestion des VLANs, la mise en place de serveurs DHCP et DNS, ainsi que la gestion des plages d'adresses IP pour garantir une infrastructure réseau fluide et sécurisée.</p>
     </section>
 
-   <!-- Section: Langages de Programmation -->
    <section id="programmation">
     <h2><span class="typing-effect">Langages de Programmation</span></h2>
     <div class="content-box">
@@ -281,5 +345,50 @@
     <footer>
         <p>© 2025 Formation Lycée Alfred Costes</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const themeIcon = themeToggle.querySelector('i');
+            
+            // Fonction pour appliquer le thème
+            function applyTheme(theme) {
+                if (theme === 'light') {
+                    body.classList.add('light-mode');
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    body.classList.remove('light-mode');
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                    localStorage.setItem('theme', 'dark');
+                }
+            }
+
+            // Vérifier la préférence stockée au chargement
+            const storedTheme = localStorage.getItem('theme');
+            if (storedTheme) {
+                applyTheme(storedTheme);
+            } else {
+                // Thème par défaut basé sur le système (si non stocké)
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                    applyTheme('light');
+                } else {
+                    applyTheme('dark');
+                }
+            }
+            
+            // Écouteur d'événement pour le bouton de bascule
+            themeToggle.addEventListener('click', () => {
+                if (body.classList.contains('light-mode')) {
+                    applyTheme('dark');
+                } else {
+                    applyTheme('light');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
