@@ -317,7 +317,7 @@
             width: 80%;
             max-width: 600px;
             box-shadow: 0 15px 40px var(--shadow-color-dark);
-            animation: popIn 0.4s ease-out; /* Changement d'animation ici */
+            animation: popIn 0.4s ease-out;
             color: var(--text-color-dark);
         }
 
@@ -356,13 +356,17 @@
             to {opacity: 1;}
         }
         
-        /* Nouvelle animation (zoom léger) */
         @keyframes popIn {
             0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
             100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         }
-
-
+        
+        /* --- NOUVEAU STYLE POUR L'EXPÉRIENCE ÉTENDUE --- */
+        .admin-network-card {
+            grid-column: 1 / -1; /* Permet à cette carte de s'étendre sur toutes les colonnes */
+            max-width: 700px; /* Limite la largeur sur très grands écrans pour qu'elle reste centrée */
+        }
+        
         /* Mobile Responsiveness */
         @media screen and (max-width: 768px) {
             nav ul {
@@ -398,6 +402,8 @@
             }
 
             .content-box {
+                /* Sur mobile, nous repassons à une seule colonne, 
+                   donc la classe .admin-network-card n'a plus besoin d'être ajustée */
                 grid-template-columns: 1fr;
             }
 
@@ -407,7 +413,6 @@
             
             .modal-content {
                 width: 90%;
-                /* Ajustement de la hauteur du centrage en mobile */
                 top: 50%;
                 margin: 0; 
             }
@@ -600,7 +605,7 @@
                 <h3>Stage Dépannage Informatique</h3>
                 <p>Mac & PC : récupération de données (2023-2024) (2024-2025).</p>
             </div>
-            <div class="card">
+            <div class="card admin-network-card">
                 <h3>Stage Administrateur Réseau</h3>
                 <p>Hotel Radisson Blu - Djerba (2025 - 2026)</p>
             </div>
