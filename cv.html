@@ -54,11 +54,13 @@
         .nav-container {
             display: flex;
             align-items: center;
-            justify-content: space-between; 
+            /* Changement: Le conteneur principal gère le centrage */
+            justify-content: center; 
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
             width: 100%;
+            position: relative; /* Important pour positionner les éléments absolus */
         }
 
         .logo {
@@ -68,6 +70,9 @@
             animation: slideInFromLeft 2s ease-out; 
             white-space: nowrap;
             transition: color 0.5s;
+            /* Changement: Positionnement absolu à gauche */
+            position: absolute;
+            left: 20px;
         }
         
         body.light-mode .logo {
@@ -97,8 +102,8 @@
             display: flex;
             justify-content: center;
             padding: 0;
-            margin: 0 50px; /* Espace pour les logos/actions */
-            flex-grow: 1;
+            margin: 0;
+            /* La liste se centre naturellement grâce à justify-content: center sur .nav-container */
         }
 
         nav .menu-list li {
@@ -133,6 +138,9 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            /* Changement: Positionnement absolu à droite */
+            position: absolute;
+            right: 20px;
         }
 
         /* Bouton de bascule de thème */
@@ -175,7 +183,7 @@
 
         .image-container img {
             width: 100%; 
-            max-width: 800px; /* Limite la taille pour une meilleure lisibilité */
+            max-width: 800px; 
             height: auto; 
             display: block;
             margin: 0 auto; 
@@ -200,9 +208,12 @@
                 flex-direction: column;
                 align-items: flex-start;
                 padding-bottom: 10px;
+                padding-left: 20px; /* Réaligner le logo en mode mobile */
+                padding-right: 20px;
             }
             
             .logo {
+                position: static; /* Retire le positionnement absolu en mobile */
                 margin-bottom: 10px;
             }
 
@@ -213,13 +224,13 @@
             }
 
             .nav-actions {
-                 position: static; 
+                 position: static; /* Retire le positionnement absolu en mobile */
                  margin-top: 10px;
                  justify-content: flex-start;
             }
             
             body {
-                padding-top: 160px; /* Ajustement pour la nav déroulée */
+                padding-top: 180px; /* Augmenter l'espace en haut pour la nav déroulée */
             }
             
             .image-container img {
