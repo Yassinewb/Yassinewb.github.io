@@ -3,319 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yassine Boulahia - Veille Technologique</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Veille Technologique - vGPU & IA - Yassine Boulahia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* --- VARIABLES DE THÈME --- */
         :root {
-            /* Dark Mode (Défaut) */
-            --bg-color-dark: #121212;
-            --text-color-dark: #e0e0e0;
-            --nav-bg-dark: rgba(0, 0, 0, 0.9);
-            --highlight-color: #ff5733;
-            --shadow-color-dark: rgba(0, 0, 0, 0.6);
+            --primary: #ff4500; 
+            --primary-muted: rgba(255, 69, 0, 0.1);
+            --radius: 12px;
+            --gradient: linear-gradient(135deg, #ff4500 0%, #e11d48 100%);
+            --bg: #050505; 
+            --card-bg: #0f0f0f; 
+            --text-main: #cbd5e1; 
+            --text-muted: #94a3b8;
+            --border: #1a1a1a;
         }
 
-        /* Light Mode */
         body.light-mode {
-            --bg-color-dark: #f0f0f0;
-            --text-color-dark: #121212;
-            --nav-bg-dark: rgba(255, 255, 255, 0.9);
-            --shadow-color-dark: rgba(0, 0, 0, 0.1);
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
         }
 
-        /* Global Styles */
-        body {
-            font-family: 'Roboto Mono', monospace;
-            line-height: 1.6;
-            background-color: var(--bg-color-dark);
-            color: var(--text-color-dark);
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            transition: background-color 0.5s, color 0.5s;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: background-color 0.3s, color 0.3s; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text-main); line-height: 1.5; font-size: 14px; padding-top: 40px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 25px; }
 
-        /* Navigation bar */
-        nav {
-            background: var(--nav-bg-dark);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 20px 0;
-            box-shadow: 0 4px 8px var(--shadow-color-dark);
-            transition: background-color 0.5s, box-shadow 0.5s;
-        }
+        /* --- STYLE RETOUR SIMPLE (COMME DESCARTES.HTML) --- */
+        .header-simple { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
+        #theme-toggle { background: var(--primary-muted); border: none; color: var(--primary); width: 35px; height: 35px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
-        .nav-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between; /* Ajustement pour les actions à droite */
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            width: 100%;
-        }
+        /* --- CONTENU --- */
+        .hero { text-align: center; padding: 40px 0; }
+        .main-title { font-size: clamp(2.2rem, 6vw, 3.2rem); font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px; }
+        .badge { background: var(--primary-muted); color: var(--primary); padding: 5px 12px; border-radius: 100px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; display: inline-block; }
 
-        .logo {
-            color: var(--text-color-dark);
-            font-size: 1.5em;
-            font-weight: bold;
-            animation: slideInFromLeft 2s ease-out;
-            white-space: nowrap;
-            transition: color 0.5s;
-        }
-        
-        body.light-mode .logo {
-            color: #121212;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 30px; }
+        .card { background: var(--card-bg); border-radius: var(--radius); padding: 25px; border: 1px solid var(--border); }
+        .veille-card i { font-size: 2.2rem; color: var(--primary); margin-bottom: 15px; display: block; }
+        .veille-card h4 { font-size: 1.1rem; margin-bottom: 15px; }
+        .veille-list { list-style: none; }
+        .veille-list li { margin-bottom: 10px; font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+        .veille-list li::before { content: "→"; color: var(--primary); font-weight: bold; }
 
+        /* --- FLUX RSS --- */
+        .rss-section { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); padding: 30px; margin-top: 30px; }
+        .rss-title { color: var(--primary); font-size: 1.5rem; margin-bottom: 25px; display: flex; align-items: center; gap: 15px; }
 
-        .logo small {
-            font-size: 0.6em;
-            color: var(--highlight-color);
-            animation: slideInFromLeft 2s ease-out 1s;
-            display: block;
-        }
+        .cta-download { display: flex; align-items: center; justify-content: space-between; background: var(--gradient); padding: 20px 30px; border-radius: var(--radius); color: white; text-decoration: none; margin: 40px 0; }
 
-        @keyframes slideInFromLeft {
-            from {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        nav .menu-list {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            padding: 0;
-            margin: 0;
-            flex-grow: 1; 
-        }
-
-        nav .menu-list li {
-            flex: 0 1 auto;
-            text-align: center;
-            margin: 0 15px;
-        }
-
-        nav .menu-list li a {
-            text-decoration: none;
-            color: var(--text-color-dark);
-            font-weight: bold;
-            padding: 10px 20px;
-            border-radius: 30px;
-            transition: all 0.4s ease;
-            display: block;
-        }
-
-        nav .menu-list li a:hover {
-            background: var(--highlight-color);
-            color: #fff;
-            transform: scale(0.9);
-        }
-        
-        body.light-mode nav .menu-list li a {
-            color: #121212;
-        }
-
-        /* Conteneur pour les actions à droite (Bouton et Theme Toggle) */
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 15px; /* Espace entre les éléments */
-            position: absolute;
-            right: 20px;
-        }
-
-        /* Bouton de bascule */
-        #theme-toggle {
-            background: none;
-            border: none;
-            color: var(--text-color-dark);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 5px;
-            transition: color 0.3s;
-        }
-
-        #theme-toggle:hover {
-            color: var(--highlight-color);
-        }
-
-
-        /* Adding space below navigation */
-        body {
-            padding-top: 80px;
-        }
-
-        /* Image Section */
-        .image-container {
-            text-align: center;
-            padding: 50px 20px;
-        }
-
-        .image-container img {
-            width: 100%; 
-            max-width: 800px; /* Limite la largeur des images de veille */
-            height: auto;
-            display: block;
-            margin: 20px auto; 
-            border: 1px solid var(--highlight-color);
-            box-shadow: 0 4px 15px var(--shadow-color-dark);
-            transition: box-shadow 0.5s;
-        }
-        
-        .image-container h2 {
-            color: var(--highlight-color);
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-
-        .download-btn {
-            background-color: var(--highlight-color);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            transition: background-color 0.3s;
-        }
-
-        .download-btn:hover {
-            background-color: #e84e2b;
-        }
-        
-        /* Footer Section */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: var(--nav-bg-dark);
-            color: var(--text-color-dark);
-            font-size: 0.9em;
-            margin-top: 40px;
-            transition: background-color 0.5s, color 0.5s;
-        }
-        
-        /* Mobile Responsiveness */
-        @media screen and (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .logo {
-                margin-bottom: 10px;
-            }
-            
-            nav .menu-list {
-                flex-direction: column;
-                width: 100%;
-                margin-top: 10px;
-            }
-
-            nav .menu-list li {
-                margin: 5px 0;
-            }
-            
-            .nav-actions {
-                 position: static; 
-                 margin-top: 10px;
-                 justify-content: flex-start;
-            }
-            
-            /* Ajustement de l'espace pour le body dû à la nav déroulée */
-            body {
-                padding-top: 160px; 
-            }
-        }
+        footer { text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.8em; }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="nav-container">
-            <div class="logo">
-                Yassine Boulahia
-                <br><small>Étudiant en BTS SIO</small>
-            </div>
-            
-            <ul class="menu-list">
-                <li><a href="index.html">Page Principal</a></li>
-                <li><a href="https://www.pearltrees.com/yasskoir/dlss4/id92890939" target="_blank" class="pearl-btn">PearlTrees</a></li>
-            </ul>
-            
-            <div class="nav-actions">
-                <a href="Veille.pdf" download="veille.pdf" class="download-btn">Télécharger</a>
-                <button id="theme-toggle" aria-label="Basculer le mode sombre/clair">
-                    <i class="fas fa-sun"></i> 
-                </button>
-            </div>
+    <div class="container">
+        <div class="header-simple">
+            <a href="index.html" class="back-link">
+                <i class="fas fa-chevron-left"></i> Retour
+            </a>
+            <button id="theme-toggle"><i class="fas fa-moon"></i></button>
         </div>
-    </nav>
-    
-    <section id="image-section" class="image-container">
-        <h2>Synthèse de Veille Technologique</h2>
-        <img src="Document 1_page-0001.jpg" alt="Synthese - Page 1" title="Voir la Synthese - Page 1">
-        <img src="Document 1_page-0002.jpg" alt="Synthese - Page 2" title="Voir la Synthese - Page 2">
-        <img src="Document 1_page-0003.jpg" alt="Synthese - Page 3" title="Voir la Synthese - Page 3">
-    </section>
+
+        <main>
+            <section class="hero">
+                <span class="badge">Veille Technologique SISR</span>
+                <h1 class="main-title">IA & vGPU dans la Virtualisation</h1>
+                <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto;">Analyse du partitionnement GPU (vGPU) pour l'accélération des calculs d'Intelligence Artificielle au sein des hyperviseurs VMware, Proxmox et Hyper-V.</p>
+            </section>
+
+            <div class="grid">
+                <article class="card veille-card">
+                    <i class="fas fa-microchip"></i>
+                    <h4>VMware ESXi</h4>
+                    <ul class="veille-list">
+                        <li>Partitionnement NVIDIA vGPU natif</li>
+                        <li>Allocation dynamique des coeurs CUDA</li>
+                        <li>Accélération via VMware Bitfusion</li>
+                    </ul>
+                </article>
+
+                <article class="card veille-card">
+                    <i class="fas fa-cubes"></i>
+                    <h4>Proxmox VE</h4>
+                    <ul class="veille-list">
+                        <li>PCI-Passthrough et SR-IOV</li>
+                        <li>Scripts vGPU unlock pour cartes GTX/RTX</li>
+                        <li>Support Docker & CUDA via LXC</li>
+                    </ul>
+                </article>
+
+                <article class="card veille-card">
+                    <i class="fas fa-desktop"></i>
+                    <h4>Windows Hyper-V</h4>
+                    <ul class="veille-list">
+                        <li>GPU Partitioning (GPU-PV)</li>
+                        <li>WSL2 pour frameworks Linux</li>
+                        <li>Support direct DirectX & CUDA</li>
+                    </ul>
+                </article>
+            </div>
+
+            <section class="rss-section">
+                <h2 class="rss-title"><i class="fas fa-newspaper"></i> Flux Actualités</h2>
+                <div id="rssGrid">
+                    <p style="color: var(--text-muted); font-style: italic;">Synchronisation avec les sources en cours...</p>
+                </div>
+            </section>
+
+            <div class="grid">
+                <div class="card">
+                    <h4 style="color:var(--primary); margin-bottom:10px;"><i class="fas fa-toolbox"></i> Méthodologie</h4>
+                    <p style="font-size:0.85rem; color:var(--text-muted);">Surveillance via Google Alerts et agrégation de flux via Inoreader.</p>
+                </div>
+                <div class="card">
+                    <h4 style="color:var(--primary); margin-bottom:10px;"><i class="fas fa-external-link-alt"></i> Accès PearlTrees</h4>
+                    <p style="font-size:0.85rem; color:var(--text-muted);">Sources documentées sur mon espace dédié.</p>
+                    <a href="https://www.pearltrees.com/yasskoir/dlss4/id92890939" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 700; font-size: 0.8rem; display: block; margin-top: 10px;">Lien PearlTrees →</a>
+                </div>
+            </div>
+
+            <a href="Veille_vGPU_IA.pdf" class="cta-download" target="_blank">
+                <div class="cta-text">
+                    <h4 style="color: white; margin-bottom: 5px;">Consulter la synthèse complète</h4>
+                    <p style="color: white; opacity: 0.8; font-size: 0.85rem;">Document PDF analysant l'impact du vGPU sur les métiers SISR.</p>
+                </div>
+                <div style="font-size: 1.5rem;"><i class="fas fa-file-pdf"></i></div>
+            </a>
+        </main>
+    </div>
 
     <footer>
-        <p>&copy; 2024 Yassine Boulahia - Tous droits réservés.</p>
+        <p>&copy; 2026 Yassine Boulahia - Veille Technologique SISR</p>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const themeToggle = document.getElementById('theme-toggle');
-            const body = document.body;
-            const themeIcon = themeToggle.querySelector('i');
-            
-            // Fonction pour appliquer le thème
-            function applyTheme(theme) {
-                if (theme === 'light') {
-                    body.classList.add('light-mode');
-                    themeIcon.classList.remove('fa-sun');
-                    themeIcon.classList.add('fa-moon');
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    body.classList.remove('light-mode');
-                    themeIcon.classList.remove('fa-moon');
-                    themeIcon.classList.add('fa-sun');
-                    localStorage.setItem('theme', 'dark');
-                }
-            }
+        const toggleBtn = document.getElementById('theme-toggle');
+        const icon = toggleBtn.querySelector('i');
+        const body = document.body;
 
-            // Vérifier la préférence stockée au chargement
-            const storedTheme = localStorage.getItem('theme');
-            if (storedTheme) {
-                applyTheme(storedTheme);
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            if (body.classList.contains('light-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'light');
             } else {
-                // Thème par défaut basé sur le système (si non stocké)
-                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-                    applyTheme('light');
-                } else {
-                    applyTheme('dark');
-                }
+                icon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'dark');
             }
-            
-            // Écouteur d'événement pour le bouton de bascule
-            themeToggle.addEventListener('click', () => {
-                if (body.classList.contains('light-mode')) {
-                    applyTheme('dark');
-                } else {
-                    applyTheme('light');
-                }
-            });
         });
+        if(localStorage.getItem('theme') === 'light') { body.classList.add('light-mode'); icon.classList.replace('fa-moon', 'fa-sun'); }
     </script>
 </body>
 </html>

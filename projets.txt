@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réalisations Techniques - Yassine Boulahia</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #ff4500; 
+            --primary-muted: rgba(255, 69, 0, 0.1);
+            --bg: #050505; 
+            --card-bg: #0f0f0f; 
+            --text-main: #cbd5e1; 
+            --text-muted: #94a3b8;
+            --border: #1a1a1a;
+            --nav-bg: rgba(5, 5, 5, 0.9);
+            --radius: 30px;
+            --shadow: 0 20px 25px -5px rgba(255, 69, 0, 0.1);
+            --gradient: linear-gradient(135deg, #ff4500 0%, #e11d48 100%);
+        }
+
+        body.light-mode {
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --nav-bg: rgba(248, 250, 252, 0.9);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text-main); line-height: 1.5; font-size: 14px; overflow-x: hidden; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        /* --- Navigation --- */
+        header { padding: 20px 0; background: var(--nav-bg); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border); }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo a { font-weight: 800; text-decoration: none; color: #fff; font-size: 1.2rem; }
+        body.light-mode .logo a { color: #000; }
+        
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .back-btn { text-decoration: none; color: var(--primary); font-weight: 700; font-size: 0.9rem; transition: 0.3s; }
+        .back-btn:hover { opacity: 0.7; }
+        #theme-toggle { background: var(--primary-muted); border: none; color: var(--primary); width: 35px; height: 35px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+        /* --- Hero --- */
+        .hero { text-align: center; padding: 80px 0 50px; }
+        .badge-projets { background: var(--primary-muted); color: var(--primary); padding: 8px 18px; border-radius: 100px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; display: inline-block; margin-bottom: 20px; }
+        .main-title { font-size: 3rem; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
+        .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 800px; margin: 0 auto; }
+
+        /* --- Grid & Cards --- */
+        .section-title { font-size: 1.6rem; color: var(--primary); margin: 60px 0 30px; display: flex; align-items: center; gap: 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        
+        .project-card { background: var(--card-bg); border-radius: var(--radius); padding: 30px; border: 1px solid var(--border); transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; }
+        .project-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: var(--shadow); }
+        .project-card i { font-size: 2rem; color: var(--primary); margin-bottom: 20px; }
+        .project-card h3 { margin-bottom: 15px; color: #fff; font-size: 1.15rem; }
+        body.light-mode .project-card h3 { color: #1e293b; }
+        .project-card p { font-size: 0.9rem; color: var(--text-muted); flex-grow: 1; margin-bottom: 20px; }
+
+        /* --- Action Buttons --- */
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
+        .tag { background: var(--primary-muted); color: var(--primary); padding: 4px 10px; border-radius: 50px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; }
+        
+        .download-btn {
+            background: var(--gradient);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+            margin-top: auto;
+        }
+        .download-btn:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(255, 69, 0, 0.3); }
+
+        footer { text-align: center; padding: 60px 0; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 60px; }
+
+        /* --- Animations --- */
+        .fade-in { animation: fadeIn 0.8s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 768px) { .main-title { font-size: 2.2rem; } .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body class="fade-in">
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo"><a href="index.html">YASSINE.B</a></div>
+                <div class="nav-right">
+                    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Retour au Portfolio</a>
+                    <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <section class="hero">
+            <span class="badge-projets">Portfolio Technique</span>
+            <h1 class="main-title">Mes Projets Réalisés</h1>
+            <p>Accédez à l'ensemble de mes comptes-rendus de travaux pratiques et projets d'infrastructure réseaux et systèmes.</p>
+        </section>
+
+        <h2 class="section-title"><i class="fas fa-server"></i> Administration & Infrastructure</h2>
+        <div class="grid">
+            <div class="project-card">
+                <i class="fas fa-cubes"></i>
+                <h3>Conteneurisation Docker</h3>
+                <p>Installation de Docker sur Debian et déploiement d'une stack MariaDB/PHPIPAM.</p>
+                <div class="tech-tags"><span class="tag">Docker</span><span class="tag">IPAM</span></div>
+                <a href="Compte Rendu docker - Boulahia Yassine.pdf" download class="download-btn"><i class="fas fa-file-pdf"></i> Télécharger</a>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-cloud"></i>
+                <h3>Cloud Nextcloud 30</h3>
+                <p>Installation complète sur stack LAMP (Ubuntu/Debian) avec PHP 8.3.</p>
+                <div class="tech-tags"><span class="tag">Nextcloud</span><span class="tag">LAMP</span></div>
+                <a href="Yassine Boulahia - Compte rendu AP 1-Nextcloud 30-Installation sur Ubuntu et Debian-1.pdf" download class="download-btn"><i class="fas fa-file-pdf"></i> Télécharger</a>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-database"></i>
+                <h3>Sauvegarde Bacula</h3>
+                <p>Mise en place de sauvegardes centralisées avec notifications SMTP Postfix.</p>
+                <div class="tech-tags"><span class="tag">Backup</span><span class="tag">Bacula</span></div>
+                <a href="Yassine Boulahia - Compte Rendu AP4 Bacula-1.pdf" download class="download-btn"><i class="fas fa-file-pdf"></i> Télécharger</a>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-users-cog"></i>
+                <h3>Active Directory WS 2022</h3>
+                <p>Promotion d'un contrôleur de domaine et gestion des OU/utilisateurs.</p>
+                <div class="tech-tags"><span class="tag">AD DS</span><span class="tag">Windows Server</span></div>
+                <a href="Yassine Boulahia - Active directory (Windows server2022).pdf" download class="download-btn"><i class="fas fa-file-pdf"></i> Télécharger</a>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-user-lock"></i>
+                <h3>Gestion par GPO</h3>
+                <p>Sécurisation des postes de travail et restriction des accès via stratégies de groupe.</p>
+                <div class="tech-tags"><span class="tag">GPO</span><span class="tag">Sécurité AD</span></div>
+                <a href="document-labo-windows-gpo.pdf" download class="download-btn"><i class="fas fa-file-pdf"></i> Télécharger</a>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-hdd"></i>
+                <h3>Stockage RAID 1/5</h3>
+                <p>Configuration de la tolérance aux pannes matérielles sur serveurs Linux.</p>
+                <div class="tech-tags"><span class="tag">RAID</span><span class="tag">Stockage</span></div>
+                <a href="document-raid.pdf" download class="download-btn"><i class="fas fa-file-pdf"></i> Télécharger</a>
+            </div>
+        </div>
+
+        <h2 class="section-title"><i class="fas fa-shield-alt"></i> Réseaux & Cybersécurité</h2>
+        <div class="grid">
+            <div class="project-card">
+                <i class="fas fa-network-wired"></i>
+                <h3>Agrégation Etherchannel</h3>
+                <p>Mise en place de liaisons logiques redondantes LACP/PAgP sur switchs Cisco.</p>
+                <div class="tech-tags"><span class="tag">Etherchannel</span><span class="tag">Cisco</span></div>
+                <a href="Yassine Boulahia - Etherchannel.pdf" download class="download-btn"><i class="fas fa-file-pdf"></i> Télécharger</a>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-project-diagram"></i>
+                <h3>VPN Site-à-Site</h3>
+                <p>Interconnexion sécurisée de sites distants via tunnels IPsec Stormshield.</p>
+                <div class="tech-tags"><span class="tag">VPN</span><span class="tag">Stormshield</span></div>
+                <a href="Doc - VPN .pdf" download class="download-btn"><i class="fas fa-file-pdf"></i> Télécharger</a>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-bug"></i>
+                <h3>Audit Metasploit</h3>
+                <p>Exploitation contrôlée de vulnérabilités pour analyse des vecteurs d'attaque.</p>
+                <div class="tech-tags"><span class="tag">Pentest</span><span class="tag">Kali Linux</span></div>
+                <a href="Doc - Metasploit.pdf" download class="download-btn"><i class="fas fa-file-pdf"></i> Télécharger</a>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-unlock-alt"></i>
+                <h3>John the Ripper</h3>
+                <p>Audit de robustesse des mots de passe système par attaque par dictionnaire.</p>
+                <div class="tech-tags"><span class="tag">Cracking</span><span class="tag">Audit</span></div>
+                <a href="Yassine Boulahia - Compte Rendu TP7 John the ripper.pdf" download class="download-btn"><i class="fas fa-file-pdf"></i> Télécharger</a>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-user-secret"></i>
+                <h3>DNS Spoofing MITM</h3>
+                <p>Simulation d'attaque "Man In The Middle" via Ettercap sur réseau local.</p>
+                <div class="tech-tags"><span class="tag">MITM</span><span class="tag">Ettercap</span></div>
+                <a href="Doc - 1DNS SPOOFING.pdf" download class="download-btn"><i class="fas fa-file-pdf"></i> Télécharger</a>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-key"></i>
+                <h3>Signature & Chiffrement PGP</h3>
+                <p>Mise en œuvre de la cryptographie asymétrique pour sécuriser les échanges.</p>
+                <div class="tech-tags"><span class="tag">PGP</span><span class="tag">Cryptographie</span></div>
+                <a href="TP5 - Yassine Boulahia Compte Rendu signature et chiffrement éléctronique_PGP.pdf" download class="download-btn"><i class="fas fa-file-pdf"></i> Télécharger</a>
+            </div>
+        </div>
+
+        <h2 class="section-title"><i class="fas fa-tools"></i> Services & Support</h2>
+        <div class="grid">
+            <div class="project-card">
+                <i class="fas fa-headset"></i>
+                <h3>Gestion de Parc GLPI</h3>
+                <p>Installation et configuration de la solution d'inventaire et de ticketing GLPI.</p>
+                <div class="tech-tags"><span class="tag">GLPI</span><span class="tag">Helpdesk</span></div>
+                <a href="TP GLPI.pdf" download class="download-btn"><i class="fas fa-file-pdf"></i> Télécharger</a>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-laptop-medical"></i>
+                <h3>Assistance RDP</h3>
+                <p>Mise en œuvre de l'assistance et du bureau à distance sécurisés sous Windows.</p>
+                <div class="tech-tags"><span class="tag">RDP</span><span class="tag">Support</span></div>
+                <a href="Yassine Boulahia - Assistance aux utilisateurs.pdf" download class="download-btn"><i class="fas fa-file-pdf"></i> Télécharger</a>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-clipboard-list"></i>
+                <h3>Analyse de logs</h3>
+                <p>Exploitation des journaux serveurs pour le troubleshooting opérationnel.</p>
+                <div class="tech-tags"><span class="tag">Logs</span><span class="tag">Diagnostic</span></div>
+                <a href="Yassine Boulahia - analyse de log.pdf" download class="download-btn"><i class="fas fa-file-pdf"></i> Télécharger</a>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-desktop"></i>
+                <h3>Poste Dualboot</h3>
+                <p>Installation et gestion du multiboot Windows / Arch-Linux avec GRUB.</p>
+                <div class="tech-tags"><span class="tag">Dualboot</span><span class="tag">GRUB</span></div>
+                <a href="document-sae103-dualboot.pdf" download class="download-btn"><i class="fas fa-file-pdf"></i> Télécharger</a>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Yassine Boulahia - Portfolio Projets SISR</p>
+    </footer>
+
+    <script>
+        const toggleBtn = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            const icon = toggleBtn.querySelector('i');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+            localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
+        });
+
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+            toggleBtn.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+        }
+    </script>
+</body>
+</html>

@@ -3,392 +3,285 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formation Lycée Alfred Costes</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Formation Lycée Alfred Costes - Yassine Boulahia</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
-        /* --- VARIABLES DE THÈME --- */
         :root {
-            /* Dark Mode (Défaut) */
-            --bg-color-dark: #121212;
-            --text-color-dark: #e0e0e0;
-            --nav-bg-dark: #1c1c1c;
-            --highlight-color: #ff5733;
-            --shadow-color-dark: rgba(0, 0, 0, 0.6);
-            --card-bg-dark: #1c1c1c;
+            --primary: #ff4500; 
+            --primary-muted: rgba(255, 69, 0, 0.1);
+            --bg: #050505; 
+            --card-bg: #111111; 
+            --text-main: #d1d5db; 
+            --text-muted: #888888;
+            --border: rgba(255, 69, 0, 0.1);
+            --nav-bg: rgba(0, 0, 0, 0.85);
+            --radius: 30px;
+            --shadow: 0 20px 25px -5px rgba(255, 69, 0, 0.1);
+            --gradient: linear-gradient(135deg, #ff4500 0%, #e11d48 100%);
         }
 
-        /* Light Mode */
         body.light-mode {
-            --bg-color-dark: #f0f0f0;
-            --text-color-dark: #121212;
-            --nav-bg-dark: #ffffff;
-            --shadow-color-dark: rgba(0, 0, 0, 0.1);
-            --card-bg-dark: #ffffff;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --nav-bg: rgba(248, 250, 252, 0.9);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
         body {
-            font-family: 'Roboto Mono', monospace;
-            background-color: var(--bg-color-dark);
-            color: var(--text-color-dark);
-            overflow-x: hidden;
-            transition: background-color 0.5s, color 0.5s;
-            padding-top: 80px; /* Espace pour la barre de navigation fixe */
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            font-size: 14px; /* Effet dézoomé harmonisé */
         }
 
-        /* Reset */
-        h1, h2, h3, p {
-            margin-bottom: 20px;
-        }
-
-        /* Fullscreen Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background-color: var(--nav-bg-dark);
-            padding: 20px 0;
-            z-index: 1000;
-            text-align: center;
-            box-shadow: 0 2px 5px var(--shadow-color-dark);
-            transition: background-color 0.5s, box-shadow 0.5s;
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            max-width: 1200px;
+        .container {
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px;
-            position: relative; /* Pour positionner le bouton de bascule */
         }
 
-        nav ul {
+        /* --- Navigation --- */
+        header {
+            padding: 15px 0;
+            background: var(--nav-bg);
+            backdrop-filter: blur(15px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
             display: flex;
-            justify-content: center;
-            gap: 30px;
-            list-style: none;
-            padding: 0;
-            margin: 0;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        nav ul li a {
+        .logo a {
+            font-weight: 800;
             text-decoration: none;
-            color: var(--highlight-color);
+            color: #fff;
             font-size: 1.2rem;
-            font-weight: 600;
-            position: relative;
-            padding: 10px 0;
-            transition: color 0.3s ease;
+        }
+        body.light-mode .logo a { color: #000; }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
-        nav ul li a::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: var(--highlight-color);
-            transform: scaleX(0);
-            transform-origin: bottom right;
-            transition: transform 0.25s ease-out;
+        .back-btn {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: opacity 0.3s;
         }
 
-        nav ul li a:hover::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
-
-        nav ul li a:hover {
-            color: var(--text-color-dark);
-        }
-        
-        /* Ajustement du texte des liens pour le mode clair */
-        body.light-mode nav ul li a:hover {
-            color: #121212;
-        }
-        
-        /* Bouton de bascule de thème */
         #theme-toggle {
-            background: none;
+            background: var(--primary-muted);
             border: none;
-            color: var(--text-color-dark);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 5px;
-            transition: color 0.3s;
-            position: absolute;
-            right: 20px;
-        }
-
-        #theme-toggle:hover {
-            color: var(--highlight-color);
-        }
-
-        /* Animations for text typing effect */
-        .typing-effect {
-            display: inline-block;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--highlight-color);
-            border-right: 2px solid var(--highlight-color);
-            white-space: nowrap;
-            overflow: hidden;
-            width: 0;
-            animation: typing 4s steps(30) 1s forwards, blink 0.75s step-end infinite;
-        }
-
-        @keyframes typing {
-            0% {
-                width: 0;
-            }
-            100% {
-                width: 100%;
-            }
-        }
-
-        @keyframes blink {
-            50% {
-                border-color: transparent;
-            }
-        }
-
-        /* Main content sections */
-        section {
-            padding: 80px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        section h2 {
-            color: var(--highlight-color);
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            position: relative;
-            display: inline-block;
-        }
-
-        section h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 4px;
-            background: var(--highlight-color);
-            border-radius: 50px;
-            animation: pulse 1.2s infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% {
-                width: 50px;
-            }
-            100% {
-                width: 70px;
-            }
-        }
-
-        .content-box {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 40px;
-            justify-items: center;
-        }
-
-        .card {
-            background-color: var(--card-bg-dark);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px var(--shadow-color-dark);
-            text-align: center;
-            position: relative;
-            transition: transform 0.3s ease-in-out, background-color 0.5s, box-shadow 0.5s;
-            color: var(--text-color-dark);
-        }
-
-        .card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-        }
-        
-        .card h3 {
-             color: var(--highlight-color);
-        }
-
-        .card img {
-            width: 80px;
-            height: 80px;
+            color: var(--primary);
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
-            margin-bottom: 20px;
-            background-color: var(--bg-color-dark); /* Empêche les icônes de se fondre dans le fond clair */
-            padding: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Footer */
-        footer {
-            background-color: var(--nav-bg-dark);
-            padding: 40px 20px;
+        /* --- Hero Section --- */
+        .hero-formation {
             text-align: center;
-            color: var(--text-color-dark);
-            margin-top: 50px;
-            transition: background-color 0.5s, color 0.5s;
+            padding: 80px 0 50px;
         }
 
-        footer p {
-            font-size: 1rem;
+        .badge-school {
+            background: var(--primary-muted);
+            color: var(--primary);
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            display: inline-block;
             margin-bottom: 20px;
         }
 
-        /* Mobile Responsiveness */
-        @media screen and (max-width: 768px) {
-            .nav-content {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                gap: 10px;
-                margin-top: 10px;
-            }
-            
-            nav ul li a {
-                font-size: 1rem;
-            }
-            
-            #theme-toggle {
-                position: static;
-                margin-top: 10px;
-            }
+        .main-title {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
 
-            section h2 {
-                font-size: 2rem;
-            }
+        /* --- Content Sections --- */
+        .description-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 40px;
+            border: 1px solid var(--border);
+            margin-bottom: 40px;
+        }
 
-            .content-box {
-                grid-template-columns: 1fr;
-            }
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-            .card {
-                padding: 15px;
-            }
+        .grid-projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 30px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .project-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .project-card h3 {
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        body.light-mode .project-card h3 { color: #1e293b; }
+
+        .project-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+        }
+
+        /* --- Animations --- */
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="nav-content">
-            <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="#packet-tracer">Cisco Packet Tracer</a></li>
-                <li><a href="#adressage">Adressage Réseau</a></li>
-                <li><a href="#programmation">Langages</a></li>
-                <li><a href="#configuration">Configuration Réseau</a></li>
-            </ul>
-            <button id="theme-toggle" aria-label="Basculer le mode sombre/clair">
-                <i class="fas fa-sun"></i> 
-            </button>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo"><a href="index.html">YASSINE.B</a></div>
+                <div class="nav-right">
+                    <a href="index.html#formation" class="back-btn"><i class="fas fa-arrow-left"></i> Retour au Portfolio</a>
+                    <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+                </div>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <section id="packet-tracer">
-        <h2><span class="typing-effect">Cisco Packet Tracer</span></h2>
-        <p>Au cours de ma formation, j'ai eu l'occasion de travailler avec le logiciel Cisco Packet Tracer, un simulateur de réseaux développé par Cisco. Cet outil m'a permis de concevoir, tester et analyser des réseaux sans avoir besoin de matériel physique. J'ai pu simuler des infrastructures complexes, configurer des routeurs, des commutateurs et des serveurs afin de mieux comprendre le fonctionnement d'un réseau informatique. Grâce à Cisco Packet Tracer, j'ai acquis des compétences solides dans la gestion des réseaux, de la création de VLAN à la gestion des protocoles de routage.</p>
-    </section>
-
-    <section id="adressage">
-        <h2><span class="typing-effect">Adressage Réseau</span></h2>
-        <p>L'adressage réseau est essentiel pour organiser et gérer les réseaux informatiques. Pendant ma formation, j'ai appris à attribuer des adresses IP aux différents équipements d'un réseau. Cela inclut la gestion des sous-réseaux pour optimiser l'utilisation des adresses disponibles. Grâce à la compréhension de la notion de masques de sous-réseau, j'ai pu diviser un réseau en sous-réseaux plus petits, ce qui améliore la sécurité et les performances. La gestion des plages d'adresses, la configuration du DHCP et l'attribution des adresses statiques sont devenues des tâches courantes que j'ai maîtrisées au fil de ma formation.</p>
-    </section>
-
-    <section id="configuration">
-        <h2><span class="typing-effect">Configuration Réseau</span></h2>
-        <p>Dans cette section, j'ai exploré différentes techniques de configuration de réseaux, y compris la création et la gestion des VLANs, la mise en place de serveurs DHCP et DNS, ainsi que la gestion des plages d'adresses IP pour garantir une infrastructure réseau fluide et sécurisée.</p>
-    </section>
-
-   <section id="programmation">
-    <h2><span class="typing-effect">Langages de Programmation</span></h2>
-    <div class="content-box">
-        <div class="card">
-            <img src="https://img.icons8.com/ios-filled/50/000000/python.png" alt="Python">
-            <h3>Python</h3>
-            <p>Python est un langage de programmation polyvalent et puissant que j'ai utilisé pour développer des applications et des scripts automatisés. Grâce à Python, j'ai automatisé plusieurs tâches réseau et créé des programmes interactifs pour le contrôle et la gestion des équipements.</p>
+    <main class="container fade-in">
+        
+        <div class="hero-formation">
+            <span class="badge-school">Lycée Alfred Costes</span>
+            <h1 class="main-title">Baccalauréat Professionnel SN</h1>
+            <p style="color: var(--text-muted);">Option RISC (Réseaux Informatiques et Systèmes Communiquants) | Mention Assez Bien</p>
         </div>
-        <div class="card">
-            <img src="https://img.icons8.com/ios-filled/50/000000/html-5.png" alt="HTML">
-            <h3>HTML & CSS</h3>
-            <p>J'ai également appris HTML et CSS, les bases du développement web. HTML m'a permis de structurer des pages web, tandis que CSS a été utilisé pour les styliser et les rendre attractives. Ces compétences m'ont permis de créer des sites web simples mais professionnels, tout en optimisant l'affichage pour différents appareils.</p>
+
+        <div class="description-card">
+            <h2 class="section-title"><i class="fas fa-project-diagram"></i> Cisco Packet Tracer</h2>
+            <p>Au cours de ma formation, j'ai maîtrisé l'utilisation de <strong>Cisco Packet Tracer</strong> pour concevoir et analyser des réseaux virtuels. Cela m'a permis de comprendre le routage, la commutation et la mise en place de VLANs sans contrainte matérielle, posant les bases de mon expertise actuelle en SISR.</p>
         </div>
-        <div class="card">
-            <img src="https://img.icons8.com/ios-filled/50/000000/arduino.png" alt="Arduino">
-            <h3>Arduino</h3>
-            <p>Le langage de programmation Arduino m'a permis de travailler sur des projets électroniques et de créer des prototypes de systèmes embarqués. J'ai programmé des microcontrôleurs pour interagir avec des capteurs et des actuateurs, et intégré ces systèmes dans des solutions automatisées.</p>
+
+        <div class="description-card">
+            <h2 class="section-title"><i class="fas fa-network-wired"></i> Adressage & Configuration</h2>
+            <p>J'ai acquis des compétences solides en <strong>adressage IP (IPv4)</strong>, notamment dans la gestion des masques de sous-réseau et l'optimisation des plages d'adresses. J'ai également appris à configurer des services essentiels comme le DHCP et le DNS pour assurer la communication entre les équipements.</p>
         </div>
-    </div>
-</section>
+
+        <h2 class="section-title" style="margin-top: 60px;"><i class="fas fa-code"></i> Développement & Systèmes</h2>
+        <div class="grid-projects">
+            <div class="project-card">
+                <i class="fab fa-python"></i>
+                <h3>Python</h3>
+                <p>Développement de scripts d'automatisation et de petits programmes interactifs pour la gestion de tâches informatiques.</p>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-laptop-code"></i>
+                <h3>Web (HTML/CSS)</h3>
+                <p>Apprentissage des bases du développement web pour structurer et styliser des interfaces professionnelles.</p>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-microchip"></i>
+                <h3>Arduino</h3>
+                <p>Programmation de systèmes embarqués et prototypage électronique via des microcontrôleurs et capteurs.</p>
+            </div>
+        </div>
+
+    </main>
 
     <footer>
-        <p>© 2025 Formation Lycée Alfred Costes</p>
+        <p>&copy; 2026 Yassine Boulahia - Tous droits réservés.</p>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const themeToggle = document.getElementById('theme-toggle');
-            const body = document.body;
-            const themeIcon = themeToggle.querySelector('i');
-            
-            // Fonction pour appliquer le thème
-            function applyTheme(theme) {
-                if (theme === 'light') {
-                    body.classList.add('light-mode');
-                    themeIcon.classList.remove('fa-sun');
-                    themeIcon.classList.add('fa-moon');
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    body.classList.remove('light-mode');
-                    themeIcon.classList.remove('fa-moon');
-                    themeIcon.classList.add('fa-sun');
-                    localStorage.setItem('theme', 'dark');
-                }
-            }
+        const toggleBtn = document.getElementById('theme-toggle');
+        const body = document.body;
 
-            // Vérifier la préférence stockée au chargement
-            const storedTheme = localStorage.getItem('theme');
-            if (storedTheme) {
-                applyTheme(storedTheme);
-            } else {
-                // Thème par défaut basé sur le système (si non stocké)
-                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-                    applyTheme('light');
-                } else {
-                    applyTheme('dark');
-                }
-            }
-            
-            // Écouteur d'événement pour le bouton de bascule
-            themeToggle.addEventListener('click', () => {
-                if (body.classList.contains('light-mode')) {
-                    applyTheme('dark');
-                } else {
-                    applyTheme('light');
-                }
-            });
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            const icon = toggleBtn.querySelector('i');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+            localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
         });
+
+        // Chargement du thème préféré
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+            toggleBtn.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+        }
     </script>
+
 </body>
 </html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veille - Théodore Trat</title>
+    <meta name="description" content="Veille technologique : évolution des modèles ChatGPT et impacts sur les métiers IT (BTS SIO SISR).">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        :root {
+            /* Palette de couleurs de l'image ci-jointe */
+            --primary: #ff4500; /* Rouge/Orange vif pour les titres et éléments actifs */
+            --primary-muted: rgba(255, 69, 0, 0.1);
+            --dark: #000000; /* Fond noir profond */
+            --card-bg: #111111; /* Légèrement plus clair pour les cartes */
+            --text-main: #d1d5db; /* Texte gris clair pour le corps */
+            --text-muted: #888888;
+            --radius: 30px;
+            --shadow: 0 20px 25px -5px rgba(255, 69, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            --gradient: linear-gradient(135deg, #ff4500 0%, #e11d48 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--dark); /* */
+            color: var(--text-main); /* */
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Header / Nav --- */
+        header {
+            padding: 20px 0;
+            background: rgba(0, 0, 0, 0.8); /* Fond sombre transparent */
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-weight: 800;
+            font-size: 1.4rem;
+            text-decoration: none;
+            color: var(--primary); /* Logo en rouge/orange */
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary); /* Souligné en rouge/orange au survol */
+        }
+
+        /* --- Veille Hero Section --- */
+        .header-center {
+            text-align: center;
+            padding: 80px 0 50px;
+        }
+
+        .badge-modern {
+            background: var(--primary-muted);
+            color: var(--primary); /* Badge en rouge/orange */
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .main-title {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ff4500, #e11d48); /* Dégradé rouge/orange */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-lead {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- Cards & Bento Grid --- */
+        .veille-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .glass-card {
+            background: var(--card-bg); /* */
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 69, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-muted);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            color: var(--primary); /* Icône en rouge/orange */
+            font-size: 1.5rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .glass-card h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--primary); /* Titre de carte en rouge/orange */
+        }
+
+        .veille-list {
+            list-style: none;
+            color: var(--text-muted);
+        }
+
+        .veille-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .veille-list li::before {
+            content: "→";
+            color: var(--primary); /* Flèche en rouge/orange */
+            font-weight: bold;
+        }
+
+        /* --- News & RSS Section --- */
+        .rss-section {
+            margin-top: 80px;
+            padding: 60px;
+            background: var(--card-bg); /* */
+            border-radius: var(--radius);
+            border: 1px solid rgba(255, 69, 0, 0.1);
+            color: var(--text-main); /* */
+        }
+
+        .rss-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--primary); /* Titre de section en rouge/orange */
+        }
+
+        .rss-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            opacity: 0.8;
+        }
+
+        /* --- Download CTA --- */
+        .cta-container {
+            margin: 50px 0 100px;
+        }
+
+        .cta-download {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--gradient);
+            padding: 30px 40px;
+            border-radius: var(--radius);
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .cta-download:hover {
+            opacity: 0.9;
+        }
+
+        .cta-text h4 { font-size: 1.4rem; margin-bottom: 5px; color: #ffffff; }
+        .cta-text p { font-size: 0.9rem; opacity: 0.9; }
+
+        .cta-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .main-title { font-size: 2rem; }
+            nav ul { display: none; }
+            .rss-section { padding: 30px; }
+        }
+    </style>
+</head>
+<body class="page-veille">
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo"><a href="index.html">Théodore Trat</a></div>
+                <ul>
+                    <li><a href="moi.html">Moi</a></li>
+                    <li><a href="parcours.html">Mon Parcours</a></li>
+                    <li><a href="projets.html">Mes Projets</a></li>
+                    <li><a href="veille.html" class="active">Veille</a></li>
+                    <li><a href="cv.html">Mon CV</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" class="container">
+        
+        <div class="header-center">
+            <span class="badge-modern">Veille Technologique</span>
+            <h2 class="main-title">Intelligence Artificielle & Métiers IT</h2>
+            <p class="section-lead">Étude de l'évolution des modèles de langage (ChatGPT) et leur intégration dans l'administration systèmes et réseaux.</p>
+        </div>
+
+        <div class="veille-grid">
+            <article class="glass-card">
+                <div class="icon-circle"><i class="fas fa-headset"></i></div>
+                <h4>Support / Helpdesk</h4>
+                <ul class="veille-list">
+                    <li>Réponses types & bases de connaissance</li>
+                    <li>Aide au diagnostic utilisateur</li>
+                    <li>Génération de tutoriels pas-à-pas</li>
+                </ul>
+            </article>
+
+            <article class="glass-card">
+                <div class="icon-circle"><i class="fas fa-server"></i></div>
+                <h4>Admin Système</h4>
+                <ul class="veille-list">
+                    <li>Scripts PowerShell & Bash assistés</li>
+                    <li>Automatisation des déploiements</li>
+                    <li>Analyse de fichiers de logs complexes</li>
+                </ul>
+            </article>
+
+            <article class="glass-card">
+                <div class="icon-circle"><i class="fas fa-user-shield"></i></div>
+                <h4>Sécurité & Risques</h4>
+                <ul class="veille-list">
+                    <li>Sensibilisation au Social Engineering</li>
+                    <li>Détection préventive de vulnérabilités</li>
+                    <li>Gouvernance de l'usage de l'IA</li>
+                </ul>
+            </article>
+        </div>
+
+        <section class="rss-section">
+            <h2 class="rss-title"><i class="fas fa-newspaper"></i> Flux Actualités</h2>
+            <div id="rssGrid" class="rss-grid">
+                <div class="rss-loading">Synchronisation avec les sources (Inoreader)...</div>
+            </div>
+        </section>
+
+        <div class="veille-grid">
+            <div class="glass-card">
+                <h4><i class="fas fa-toolbox" style="margin-right:10px; color:var(--primary)"></i> Outils de veille</h4>
+                <p style="color:var(--text-muted); font-size: 0.95rem;">
+                    Utilisation combinée de <strong>Inoreader</strong> pour l'agrégation de flux et <strong>Google Alerts</strong> pour la surveillance de mots-clés spécifiques.
+                </p>
+            </div>
+            <div class="glass-card">
+                <h4><i class="fas fa-book" style="margin-right:10px; color:var(--primary)"></i> Sources suivies</h4>
+                <p style="color:var(--text-muted); font-size: 0.95rem;">
+                    ZDNet, Le Monde Informatique, OpenAI Blog, IT-Connect et Microsoft Tech Community.
+                </p>
+            </div>
+        </div>
+
+        <div class="cta-container">
+            <a href="pdfs/synthese-veille-technologique.pdf" class="cta-download" target="_blank">
+                <div class="cta-text">
+                    <h4>Consulter la synthèse complète</h4>
+                    <p>Document PDF récapitulant 2 ans de veille technologique.</p>
+                </div>
+                <div class="cta-icon">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Théodore Trat. Tous droits réservés.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

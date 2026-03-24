@@ -3,370 +3,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formation BTS SIO - Cybersécurité</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Expertise SISR - Lycée René Descartes - Yassine Boulahia</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
-        /* --- VARIABLES DE THÈME --- */
         :root {
-            /* Dark Mode (Défaut) */
-            --bg-color-dark: #121212;
-            --text-color-dark: #e0e0e0;
-            --nav-bg-dark: #1c1c1c;
-            --highlight-color: #ff5733;
-            --shadow-color-dark: rgba(0, 0, 0, 0.6);
-            --card-bg-dark: #1c1c1c;
+            --primary: #ff4500; 
+            --primary-muted: rgba(255, 69, 0, 0.1);
+            --bg: #050505; 
+            --card-bg: #0f0f0f; 
+            --text-main: #cbd5e1; 
+            --text-muted: #94a3b8;
+            --border: #1a1a1a;
+            --nav-bg: rgba(5, 5, 5, 0.9);
+            --radius: 20px;
+            --gradient: linear-gradient(135deg, #ff4500 0%, #e11d48 100%);
         }
 
-        /* Light Mode */
         body.light-mode {
-            --bg-color-dark: #f0f0f0;
-            --text-color-dark: #121212;
-            --nav-bg-dark: #ffffff;
-            --shadow-color-dark: rgba(0, 0, 0, 0.1);
-            --card-bg-dark: #ffffff;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --nav-bg: rgba(248, 250, 252, 0.9);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.25s ease; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text-main); line-height: 1.4; font-size: 13px; overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
 
-        body {
-            font-family: 'Roboto Mono', monospace;
-            background-color: var(--bg-color-dark);
-            color: var(--text-color-dark);
-            overflow-x: hidden;
-            transition: background-color 0.5s, color 0.5s;
-            padding-top: 80px; /* Espace pour la barre de navigation fixe */
-        }
+        /* --- Navigation --- */
+        header { padding: 12px 0; background: var(--nav-bg); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border); }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo a { font-weight: 800; text-decoration: none; color: #fff; font-size: 1rem; }
+        body.light-mode .logo a { color: #000; }
+        .nav-right { display: flex; align-items: center; gap: 15px; }
+        .back-btn { text-decoration: none; color: var(--primary); font-weight: 700; font-size: 0.8rem; }
+        #theme-toggle { background: var(--primary-muted); border: none; color: var(--primary); width: 30px; height: 30px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
-        /* Reset */
-        h1, h2, h3, p {
-            margin-bottom: 20px;
-        }
+        /* --- Hero --- */
+        .hero { text-align: center; padding: 50px 0 30px; }
+        .badge-school { background: var(--primary-muted); color: var(--primary); padding: 5px 15px; border-radius: 100px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; display: inline-block; margin-bottom: 15px; }
+        .main-title { font-size: 2.5rem; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
 
-        /* Fullscreen Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background-color: var(--nav-bg-dark);
-            padding: 20px 0;
-            z-index: 1000;
-            text-align: center;
-            box-shadow: 0 2px 5px var(--shadow-color-dark);
-            transition: background-color 0.5s, box-shadow 0.5s;
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            position: relative; /* Pour positionner le bouton de bascule */
-        }
-
-        nav ul {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: var(--highlight-color);
-            font-size: 1.2rem;
-            font-weight: 600;
-            position: relative;
-            padding: 10px 0;
-            transition: color 0.3s ease;
-        }
-
-        nav ul li a::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: var(--highlight-color);
-            transform: scaleX(0);
-            transform-origin: bottom right;
-            transition: transform 0.25s ease-out;
-        }
-
-        nav ul li a:hover::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
-
-        nav ul li a:hover {
-            color: var(--text-color-dark);
-        }
+        /* --- Grid & Titles --- */
+        .section-title { font-size: 1.1rem; color: var(--primary); margin: 40px 0 20px; display: flex; align-items: center; gap: 10px; font-weight: 800; text-transform: uppercase; border-left: 3px solid var(--primary); padding-left: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px; }
         
-        body.light-mode nav ul li a:hover {
-            color: #121212;
-        }
-        
-        /* Bouton de bascule de thème */
-        #theme-toggle {
-            background: none;
-            border: none;
-            color: var(--text-color-dark);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 5px;
-            transition: color 0.3s;
-            position: absolute;
-            right: 20px;
-        }
+        .project-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; display: flex; flex-direction: column; }
+        .project-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .project-card i { font-size: 1.3rem; color: var(--primary); margin-bottom: 12px; opacity: 0.8; }
+        .project-card h3 { margin-bottom: 8px; color: #fff; font-size: 0.95rem; font-weight: 700; }
+        body.light-mode .project-card h3 { color: #1e293b; }
+        .project-card p { font-size: 0.8rem; color: var(--text-muted); flex-grow: 1; margin-bottom: 12px; line-height: 1.5; }
 
-        #theme-toggle:hover {
-            color: var(--highlight-color);
-        }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+        .tag { background: var(--primary-muted); color: var(--primary); padding: 2px 7px; border-radius: 4px; font-size: 0.58rem; font-weight: 700; }
 
-
-        /* Animations for text typing effect */
-        .typing-effect {
-            display: inline-block;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--highlight-color);
-            border-right: 2px solid var(--highlight-color);
-            white-space: nowrap;
-            overflow: hidden;
-            width: 0;
-            animation: typing 4s steps(30) 1s forwards, blink 0.75s step-end infinite;
-        }
-
-        @keyframes typing {
-            0% {
-                width: 0;
-            }
-            100% {
-                width: 100%;
-            }
-        }
-
-        @keyframes blink {
-            50% {
-                border-color: transparent;
-            }
-        }
-
-        /* Main content sections */
-        section {
-            padding: 80px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        section h2 {
-            color: var(--highlight-color);
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            position: relative;
-            display: inline-block;
-        }
-
-        section h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 4px;
-            background: var(--highlight-color);
-            border-radius: 50px;
-            animation: pulse 1.2s infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% {
-                width: 50px;
-            }
-            100% {
-                width: 70px;
-            }
-        }
-
-        .content-box {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 40px;
-            justify-items: center;
-        }
-
-        .card {
-            background-color: var(--card-bg-dark);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px var(--shadow-color-dark);
-            text-align: center;
-            position: relative;
-            transition: transform 0.3s ease-in-out, background-color 0.5s, box-shadow 0.5s;
-            color: var(--text-color-dark);
-        }
-
-        .card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-        }
-
-        .card img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--nav-bg-dark);
-            padding: 40px 20px;
-            text-align: center;
-            color: var(--text-color-dark);
-            margin-top: 50px;
-            transition: background-color 0.5s, color 0.5s;
-        }
-
-        footer p {
-            font-size: 1rem;
-            margin-bottom: 20px;
-        }
-
-        /* Mobile Responsiveness */
-        @media screen and (max-width: 768px) {
-            .nav-content {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                gap: 10px;
-                margin-top: 10px;
-            }
-            
-            nav ul li a {
-                font-size: 1rem;
-            }
-            
-            #theme-toggle {
-                position: static;
-                margin-top: 10px;
-            }
-
-            section h2 {
-                font-size: 2rem;
-            }
-
-            .content-box {
-                grid-template-columns: 1fr;
-            }
-
-            .card {
-                padding: 15px;
-            }
-        }
+        footer { text-align: center; padding: 40px 0; color: var(--text-muted); border-top: 1px solid var(--border); font-size: 0.7rem; }
+        .fade-in { animation: fadeIn 0.6s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body>
+<body class="fade-in">
 
-    <nav>
-        <div class="nav-content">
-            <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="#failover">Failover et Haute Disponibilité</a></li>
-                <li><a href="#dns">DNS</a></li>
-                <li><a href="#firewall">Filtrage et NAT</a></li>
-                <li><a href="#replication">Réplication</a></li>
-            </ul>
-            <button id="theme-toggle" aria-label="Basculer le mode sombre/clair">
-                <i class="fas fa-sun"></i> 
-            </button>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo"><a href="index.html">YASSINE.B</a></div>
+                <div class="nav-right">
+                    <a href="index.html#formation" class="back-btn"><i class="fas fa-arrow-left"></i> Retour au Portfolio</a>
+                    <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+                </div>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <section id="failover">
-        <h2><span class="typing-effect">Failover et Haute Disponibilité</span></h2>
-        <p>Durant ma formation, j'ai mis en place des techniques de haute disponibilité, telles que le failover actif/passif et la répartition de charge, permettant d'assurer la disponibilité continue des services, même en cas de défaillance d'un serveur. </p>
-    </section>
+    <main class="container">
+        <section class="hero">
+            <span class="badge-school">Lycée René Descartes</span>
+            <h1 class="main-title">Dossier de Réalisations SISR</h1>
+            <p>Spécialisation en Infrastructures Réseaux, Administration Systèmes et Cybersécurité.</p>
+        </section>
 
-    <section id="dns">
-        <h2><span class="typing-effect">Gestion des DNS</span></h2>
-        <p>La gestion des serveurs DNS est cruciale pour un réseau fonctionnel. J'ai configuré des serveurs DNS pour assurer la résolution des noms de domaine au sein de l'organisation, notamment en configurant un serveur cache et en gérant les zones DNS. </p>
-    </section>
+        <h2 class="section-title"><i class="fas fa-network-wired"></i> Infrastructures Réseaux Cisco</h2>
+        <div class="grid">
+            <div class="project-card">
+                <i class="fas fa-project-diagram"></i>
+                <h3>HSRP / FHRP Cisco</h3>
+                <p>Mise en place de la redondance de passerelle pour assurer la haute disponibilité du routage.</p>
+                <div class="tech-tags"><span class="tag">High Availability</span><span class="tag">Gateway</span></div>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-exchange-alt"></i>
+                <h3>Routage Inter-VLAN</h3>
+                <p>Configuration Router-on-a-stick et switchs L3 pour la communication entre segments réseau.</p>
+                <div class="tech-tags"><span class="tag">VLAN</span><span class="tag">Routing</span></div>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-layer-group"></i>
+                <h3>STP Spanning-Tree</h3>
+                <p>Prévention des boucles de niveau 2, élection du Root Bridge et optimisation des liens.</p>
+                <div class="tech-tags"><span class="tag">L2 Security</span><span class="tag">Switching</span></div>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-link"></i>
+                <h3>Etherchannel LACP</h3>
+                <p>Agrégation de liens physiques en un lien logique pour augmenter la bande passante.</p>
+                <div class="tech-tags"><span class="tag">Bonding</span><span class="tag">PAgP/LACP</span></div>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-cog"></i>
+                <h3>Config Base Switch/Routeur</h3>
+                <p>Sécurisation des accès VTY/Console, bannières et configuration des interfaces IP.</p>
+                <div class="tech-tags"><span class="tag">IOS</span><span class="tag">CLI</span></div>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-sitemap"></i>
+                <h3>Segmentation IPv4</h3>
+                <p>Découpage de réseaux en sous-réseaux (Subnetting) via calculs binaires et masques VLSM.</p>
+                <div class="tech-tags"><span class="tag">VLSM</span><span class="tag">Adressage</span></div>
+            </div>
+        </div>
 
-    <section id="firewall">
-        <h2><span class="typing-effect">Filtrage et Traduction d'Adresses (NAT)</span></h2>
-        <p>J'ai également configuré des règles de filtrage et de NAT (Network Address Translation) sur le pare-feu pour sécuriser l'accès au réseau, tout en permettant une gestion fine des flux et de l'accès à Internet pour les différentes machines du réseau. </p>
-    </section>
+        <h2 class="section-title"><i class="fas fa-server"></i> Systèmes, Stockage & Cloud</h2>
+        <div class="grid">
+            <div class="project-card">
+                <i class="fas fa-hdd"></i>
+                <h3>Serveur NAS OpenMediaVault</h3>
+                <p>Déploiement d'un stockage réseau sécurisé avec gestion des partages SMB et NFS.</p>
+                <div class="tech-tags"><span class="tag">NAS</span><span class="tag">Storage</span></div>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-users-cog"></i>
+                <h3>Active Directory & GPO</h3>
+                <p>Gestion centralisée sous Windows Server 2022 : annuaire AD DS et stratégies de groupe.</p>
+                <div class="tech-tags"><span class="tag">Windows Server</span><span class="tag">GPO</span></div>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-cubes"></i>
+                <h3>Docker & Containerisation</h3>
+                <p>Installation de Docker sur Debian et déploiement de stacks services via Docker Compose.</p>
+                <div class="tech-tags"><span class="tag">Docker</span><span class="tag">Micro-services</span></div>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-cloud"></i>
+                <h3>Cloud Nextcloud 30</h3>
+                <p>Installation d'une solution de collaboration privée sur architecture LAMP optimisée.</p>
+                <div class="tech-tags"><span class="tag">Nextcloud</span><span class="tag">LAMP</span></div>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-database"></i>
+                <h3>RAID & Réplication</h3>
+                <p>Mise en place de volumes RAID 1/5 et réplication de données pour la continuité d'activité.</p>
+                <div class="tech-tags"><span class="tag">RAID</span><span class="tag">Disponibilité</span></div>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-globe"></i>
+                <h3>DNS Lab Bind9</h3>
+                <p>Configuration d'un serveur DNS Linux faisant autorité (Zones directes et inverses).</p>
+                <div class="tech-tags"><span class="tag">DNS</span><span class="tag">Bind9</span></div>
+            </div>
+        </div>
 
-    <section id="replication">
-        <h2><span class="typing-effect">Réplication de Données</span></h2>
-        <p>La réplication de données a été un élément clé pour assurer la cohérence des services. J'ai mis en œuvre des solutions de réplication asynchrone et synchrone pour garantir que les données soient uniformément disponibles et à jour sur tous les serveurs. </p>
-    </section>
+        <h2 class="section-title"><i class="fas fa-eye"></i> Supervision & Haute Disponibilité</h2>
+        <div class="grid">
+            <div class="project-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Supervision Zabbix</h3>
+                <p>Surveillance active du parc, configuration des agents et alertes de seuils critiques.</p>
+                <div class="tech-tags"><span class="tag">Monitoring</span><span class="tag">Zabbix</span></div>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-microchip"></i>
+                <h3>Observium</h3>
+                <p>Auto-découverte et monitoring SNMP de l'ensemble des équipements réseau de l'infra.</p>
+                <div class="tech-tags"><span class="tag">SNMP</span><span class="tag">Network Monitoring</span></div>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-heartbeat"></i>
+                <h3>Failover & Load Balancing</h3>
+                <p>Mise en œuvre du basculement automatique via Heartbeat et répartition de charge LVS.</p>
+                <div class="tech-tags"><span class="tag">Load Balancing</span><span class="tag">Failover</span></div>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-phone-alt"></i>
+                <h3>ToIP Asterisk</h3>
+                <p>Configuration d'un PBX IP Asterisk pour la téléphonie d'entreprise (Comptes SIP).</p>
+                <div class="tech-tags"><span class="tag">Asterisk</span><span class="tag">VoIP</span></div>
+            </div>
+        </div>
+
+        <h2 class="section-title"><i class="fas fa-shield-alt"></i> Sécurité & Audit</h2>
+        <div class="grid">
+            <div class="project-card">
+                <i class="fas fa-user-shield"></i>
+                <h3>Firewall pfSense</h3>
+                <p>Mise en place de règles de filtrage, routage NAT/PAT et sauvegardes de configuration.</p>
+                <div class="tech-tags"><span class="tag">pfSense</span><span class="tag">Firewalling</span></div>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-mask"></i>
+                <h3>DNS Spoofing MITM</h3>
+                <p>Analyse des vulnérabilités aux attaques Man In The Middle via empoisonnement DNS.</p>
+                <div class="tech-tags"><span class="tag">MITM</span><span class="tag">Kali Linux</span></div>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-lock"></i>
+                <h3>Accès SSH Sécurisé</h3>
+                <p>Authentification par clés publiques et durcissement du service d'accès distant.</p>
+                <div class="tech-tags"><span class="tag">SSH</span><span class="tag">Security Hardening</span></div>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-filter"></i>
+                <h3>UTM Squid Proxy</h3>
+                <p>Contrôle des flux web, filtrage URL et mise en place de proxy cache SquidGuard.</p>
+                <div class="tech-tags"><span class="tag">Proxy</span><span class="tag">UTM</span></div>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-fingerprint"></i>
+                <h3>Sécurité MD5</h3>
+                <p>Étude des vulnérabilités de hachage et démonstration des collisions MD5.</p>
+                <div class="tech-tags"><span class="tag">Hashing</span><span class="tag">MD5</span></div>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-clone"></i>
+                <h3>Clonezilla Mastering</h3>
+                <p>Création d'images disques pour le déploiement rapide et sécurisé de parcs de postes.</p>
+                <div class="tech-tags"><span class="tag">Imaging</span><span class="tag">Clonezilla</span></div>
+            </div>
+        </div>
+    </main>
 
     <footer>
-        <p>© 2025 Formation BTS SIO - Lycée René Descartes</p>
+        <p>&copy; 2026 Yassine Boulahia - Portfolio de Formation SISR</p>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const themeToggle = document.getElementById('theme-toggle');
-            const body = document.body;
-            const themeIcon = themeToggle.querySelector('i');
-            
-            // Fonction pour appliquer le thème
-            function applyTheme(theme) {
-                if (theme === 'light') {
-                    body.classList.add('light-mode');
-                    themeIcon.classList.remove('fa-sun');
-                    themeIcon.classList.add('fa-moon');
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    body.classList.remove('light-mode');
-                    themeIcon.classList.remove('fa-moon');
-                    themeIcon.classList.add('fa-sun');
-                    localStorage.setItem('theme', 'dark');
-                }
-            }
+        const toggleBtn = document.getElementById('theme-toggle');
+        const body = document.body;
 
-            // Vérifier la préférence stockée au chargement
-            const storedTheme = localStorage.getItem('theme');
-            if (storedTheme) {
-                applyTheme(storedTheme);
-            } else {
-                // Thème par défaut basé sur le système (si non stocké)
-                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-                    applyTheme('light');
-                } else {
-                    applyTheme('dark');
-                }
-            }
-            
-            // Écouteur d'événement pour le bouton de bascule
-            themeToggle.addEventListener('click', () => {
-                if (body.classList.contains('light-mode')) {
-                    applyTheme('dark');
-                } else {
-                    applyTheme('light');
-                }
-            });
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            const icon = toggleBtn.querySelector('i');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+            localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
         });
+
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+            toggleBtn.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+        }
     </script>
 </body>
 </html>
