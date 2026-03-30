@@ -32,7 +32,7 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text-main); line-height: 1.5; font-size: 14px; padding-top: 40px; }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 25px; }
 
-        /* --- STYLE RETOUR SIMPLE (COMME DESCARTES.HTML) --- */
+        /* --- HEADER --- */
         .header-simple { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
         .back-link { color: var(--primary); text-decoration: none; font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
         #theme-toggle { background: var(--primary-muted); border: none; color: var(--primary); width: 35px; height: 35px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
@@ -53,6 +53,12 @@
         /* --- FLUX RSS --- */
         .rss-section { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); padding: 30px; margin-top: 30px; }
         .rss-title { color: var(--primary); font-size: 1.5rem; margin-bottom: 25px; display: flex; align-items: center; gap: 15px; }
+        .rss-item { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed var(--border); }
+        .rss-item:last-child { border-bottom: none; }
+        .rss-item a { color: var(--text-main); text-decoration: none; font-weight: 600; font-size: 1rem; display: block; margin-bottom: 5px; }
+        .rss-item a:hover { color: var(--primary); }
+        .rss-date { font-size: 0.75rem; color: var(--primary); font-weight: 800; text-transform: uppercase; }
+        .rss-desc { font-size: 0.85rem; color: var(--text-muted); margin-top: 5px; }
 
         .cta-download { display: flex; align-items: center; justify-content: space-between; background: var(--gradient); padding: 20px 30px; border-radius: var(--radius); color: white; text-decoration: none; margin: 40px 0; }
 
@@ -109,16 +115,16 @@
             </div>
 
             <section class="rss-section">
-                <h2 class="rss-title"><i class="fas fa-newspaper"></i> Flux Actualités</h2>
+                <h2 class="rss-title"><i class="fas fa-rss"></i> Flux Actualités (Google Alerts)</h2>
                 <div id="rssGrid">
-                    <p style="color: var(--text-muted); font-style: italic;">Synchronisation avec les sources en cours...</p>
+                    <p style="color: var(--text-muted); font-style: italic;"><i class="fas fa-sync fa-spin"></i> Récupération des dernières alertes...</p>
                 </div>
             </section>
 
             <div class="grid">
                 <div class="card">
                     <h4 style="color:var(--primary); margin-bottom:10px;"><i class="fas fa-toolbox"></i> Méthodologie</h4>
-                    <p style="font-size:0.85rem; color:var(--text-muted);">Surveillance via Google Alerts et agrégation de flux via Inoreader.</p>
+                    <p style="font-size:0.85rem; color:var(--text-muted);">Surveillance via Google Alerts et agrégation automatique en temps réel.</p>
                 </div>
                 <div class="card">
                     <h4 style="color:var(--primary); margin-bottom:10px;"><i class="fas fa-external-link-alt"></i> Accès PearlTrees</h4>
@@ -142,21 +148,63 @@
     </footer>
 
     <script>
+        // --- GESTION DU THÈME ---
         const toggleBtn = document.getElementById('theme-toggle');
         const icon = toggleBtn.querySelector('i');
         const body = document.body;
 
         toggleBtn.addEventListener('click', () => {
             body.classList.toggle('light-mode');
-            if (body.classList.contains('light-mode')) {
-                icon.classList.replace('fa-moon', 'fa-sun');
-                localStorage.setItem('theme', 'light');
-            } else {
-                icon.classList.replace('fa-sun', 'fa-moon');
-                localStorage.setItem('theme', 'dark');
-            }
+            const isLight = body.classList.contains('light-mode');
+            icon.classList.replace(isLight ? 'fa-moon' : 'fa-sun', isLight ? 'fa-sun' : 'fa-moon');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
         });
-        if(localStorage.getItem('theme') === 'light') { body.classList.add('light-mode'); icon.classList.replace('fa-moon', 'fa-sun'); }
+
+        if(localStorage.getItem('theme') === 'light') { 
+            body.classList.add('light-mode'); 
+            icon.classList.replace('fa-moon', 'fa-sun'); 
+        }
+
+        // --- CHARGEMENT DU FLUX RSS VIA API ---
+        const RSS_FEED_URL = 'https://www.google.fr/alerts/feeds/06544073337020145377/10066427386293151662';
+        // Utilisation de rss2json pour convertir le XML en JSON (contourne les erreurs CORS)
+        const API_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_FEED_URL)}`;
+
+        async function fetchRSS() {
+            const container = document.getElementById('rssGrid');
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+
+                if (data.status === 'ok') {
+                    container.innerHTML = ''; // Vide le message de chargement
+                    
+                    data.items.forEach(item => {
+                        // Formater la date
+                        const dateObj = new Date(item.pubDate);
+                        const dateFormatted = dateObj.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+                        // Nettoyer la description (enlever le HTML des alertes Google)
+                        const cleanDesc = item.description.replace(/<[^>]*>?/gm, '').substring(0, 180) + '...';
+
+                        const articleHtml = `
+                            <div class="rss-item">
+                                <span class="rss-date">${dateFormatted}</span>
+                                <a href="${item.link}" target="_blank">${item.title}</a>
+                                <p class="rss-desc">${cleanDesc}</p>
+                            </div>
+                        `;
+                        container.innerHTML += articleHtml;
+                    });
+                } else {
+                    throw new Error("Flux non disponible");
+                }
+            } catch (error) {
+                container.innerHTML = `<p style="color: #ef4444; font-size:0.85rem;">Erreur de chargement du flux RSS. <a href="${RSS_FEED_URL}" target="_blank" style="color:var(--primary);">Ouvrir le flux manuellement</a>.</p>`;
+            }
+        }
+
+        fetchRSS();
     </script>
 </body>
 </html>
