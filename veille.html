@@ -28,189 +28,199 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; transition: background-color 0.3s, color 0.3s; }
+        html { scroll-behavior: smooth; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text-main); line-height: 1.5; font-size: 14px; padding-top: 40px; }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 25px; }
 
+        /* --- HEADER --- */
         .header-simple { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
-        .back-link { color: var(--primary); text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
         #theme-toggle { background: var(--primary-muted); border: none; color: var(--primary); width: 35px; height: 35px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
-        .hero { text-align: center; padding: 20px 0; }
-        .main-title { font-size: 2.5rem; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
-        
-        /* --- LE RECTANGLE DE DÉFILEMENT (VIEWPORT) --- */
-        .rss-section { margin: 30px 0; }
-        .rss-viewport { 
-            height: 400px; /* Hauteur de la fenêtre visible */
-            overflow: hidden; 
-            position: relative; 
-            background: var(--card-bg); 
-            border: 1px solid var(--border); 
-            border-radius: var(--radius); 
-        }
+        /* --- CONTENU --- */
+        .hero { text-align: center; padding: 40px 0; }
+        .main-title { font-size: clamp(2.2rem, 6vw, 3.2rem); font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px; }
+        .badge { background: var(--primary-muted); color: var(--primary); padding: 5px 12px; border-radius: 100px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; display: inline-block; }
 
-        /* --- LE CONTENEUR QUI BOUGE --- */
-        #rssGrid {
-            display: flex;
-            flex-direction: column;
-            will-change: transform;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 30px; }
+        .card { background: var(--card-bg); border-radius: var(--radius); padding: 25px; border: 1px solid var(--border); }
+        .veille-card i { font-size: 2.2rem; color: var(--primary); margin-bottom: 15px; display: block; }
+        .veille-card h4 { font-size: 1.1rem; margin-bottom: 15px; }
+        .veille-list { list-style: none; }
+        .veille-list li { margin-bottom: 10px; font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+        .veille-list li::before { content: "→"; color: var(--primary); font-weight: bold; }
 
-        /* Cette classe sera ajoutée par le JS une fois les données chargées */
-        .animate-loop {
-            animation: scroll-loop 40s linear infinite;
-        }
-
-        #rssGrid:hover {
-            animation-play-state: paused; /* S'arrête quand on survole */
-        }
-
-        .rss-item { 
-            padding: 25px; 
-            border-bottom: 1px solid var(--border); 
-            min-height: 130px;
-        }
-
-        .rss-item a { color: var(--text-main); text-decoration: none; font-weight: 700; font-size: 1.1rem; display: block; margin-bottom: 5px; }
+        /* --- FLUX RSS --- */
+        .rss-section { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); padding: 30px; margin-top: 30px; }
+        .rss-title { color: var(--primary); font-size: 1.5rem; margin-bottom: 25px; display: flex; align-items: center; gap: 15px; }
+        .rss-item { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed var(--border); }
+        .rss-item:last-child { border-bottom: none; }
+        .rss-item a { color: var(--text-main); text-decoration: none; font-weight: 600; font-size: 1rem; display: block; margin-bottom: 5px; }
         .rss-item a:hover { color: var(--primary); }
-        .rss-date { font-size: 0.7rem; color: var(--primary); font-weight: 800; text-transform: uppercase; }
-        .rss-desc { font-size: 0.85rem; color: var(--text-muted); margin-top: 5px; line-height: 1.4; }
+        .rss-date { font-size: 0.75rem; color: var(--primary); font-weight: 800; text-transform: uppercase; }
+        .rss-desc { font-size: 0.85rem; color: var(--text-muted); margin-top: 5px; }
 
-        /* L'ANIMATION : On monte jusqu'à la moitié (car le contenu est doublé) */
-        @keyframes scroll-loop {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-50%); }
-        }
+        .cta-download { display: flex; align-items: center; justify-content: space-between; background: var(--gradient); padding: 20px 30px; border-radius: var(--radius); color: white; text-decoration: none; margin: 40px 0; }
 
-        /* --- GRILLE ET CARTES --- */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 20px; }
-        .card { background: var(--card-bg); border-radius: var(--radius); padding: 20px; border: 1px solid var(--border); }
-        .card i { color: var(--primary); font-size: 1.5rem; margin-bottom: 10px; display: block; }
-
-        .cta-download { display: flex; align-items: center; justify-content: space-between; background: var(--gradient); padding: 20px; border-radius: var(--radius); color: white; text-decoration: none; margin-top: 30px; }
-
-        footer { text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.8rem; }
+        footer { text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.8em; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <div class="header-simple">
-            <a href="index.html" class="back-link"><i class="fas fa-chevron-left"></i> Retour</a>
+            <a href="index.html" class="back-link">
+                <i class="fas fa-chevron-left"></i> Retour
+            </a>
             <button id="theme-toggle"><i class="fas fa-moon"></i></button>
         </div>
 
         <main>
             <section class="hero">
+                <span class="badge">Veille Technologique SISR</span>
                 <h1 class="main-title">IA & vGPU dans la Virtualisation</h1>
-                <p style="color: var(--text-muted);">Veille technologique SISR - Yassine Boulahia</p>
+                <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto;">Analyse du partitionnement GPU (vGPU) pour l'accélération des calculs d'Intelligence Artificielle au sein des hyperviseurs VMware, Proxmox et Hyper-V.</p>
             </section>
 
+            <div class="grid">
+                <article class="card veille-card">
+                    <i class="fas fa-microchip"></i>
+                    <h4>VMware ESXi</h4>
+                    <ul class="veille-list">
+                        <li>Partitionnement NVIDIA vGPU natif</li>
+                        <li>Allocation dynamique des coeurs CUDA</li>
+                        <li>Accélération via VMware Bitfusion</li>
+                    </ul>
+                </article>
+
+                <article class="card veille-card">
+                    <i class="fas fa-cubes"></i>
+                    <h4>Proxmox VE</h4>
+                    <ul class="veille-list">
+                        <li>PCI-Passthrough et SR-IOV</li>
+                        <li>Scripts vGPU unlock pour cartes GTX/RTX</li>
+                        <li>Support Docker & CUDA via LXC</li>
+                    </ul>
+                </article>
+
+                <article class="card veille-card">
+                    <i class="fas fa-desktop"></i>
+                    <h4>Windows Hyper-V</h4>
+                    <ul class="veille-list">
+                        <li>GPU Partitioning (GPU-PV)</li>
+                        <li>WSL2 pour frameworks Linux</li>
+                        <li>Support direct DirectX & CUDA</li>
+                    </ul>
+                </article>
+            </div>
+
             <section class="rss-section">
-                <h2 style="margin-bottom:15px; font-size: 1.3rem; display: flex; align-items: center; gap: 10px;">
-                    <i class="fas fa-rss" style="color: var(--primary);"></i> Actualités en boucle
-                </h2>
-                <div class="rss-viewport">
-                    <div id="rssGrid">
-                        <p id="loading-msg" style="padding:40px; text-align:center; color:var(--text-muted);">
-                            <i class="fas fa-sync fa-spin"></i> Chargement du flux Google Alerts...
-                        </p>
-                    </div>
+                <h2 class="rss-title"><i class="fas fa-rss"></i> Flux Actualités (Multi-Sources)</h2>
+                <div id="rssGrid">
+                    <p style="color: var(--text-muted); font-style: italic;"><i class="fas fa-sync fa-spin"></i> Récupération des dernières alertes...</p>
                 </div>
             </section>
 
             <div class="grid">
                 <div class="card">
-                    <i class="fas fa-external-link-alt"></i>
-                    <h4>PearlTrees</h4>
-                    <a href="https://www.pearltrees.com/yasskoir/dlss4/id92890939" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: bold; font-size: 0.85rem;">Voir mes sources →</a>
+                    <h4 style="color:var(--primary); margin-bottom:10px;"><i class="fas fa-toolbox"></i> Méthodologie</h4>
+                    <p style="font-size:0.85rem; color:var(--text-muted);">Surveillance via Google Alerts (IA, vGPU, Virtualisation) et agrégation automatique.</p>
                 </div>
                 <div class="card">
-                    <i class="fas fa-microchip"></i>
-                    <h4>vGPU & IA</h4>
-                    <p style="font-size:0.8rem; color:var(--text-muted);">Analyse du partitionnement des ressources graphiques pour l'IA.</p>
+                    <h4 style="color:var(--primary); margin-bottom:10px;"><i class="fas fa-external-link-alt"></i> Accès PearlTrees</h4>
+                    <p style="font-size:0.85rem; color:var(--text-muted);">Sources documentées sur mon espace dédié.</p>
+                    <a href="https://www.pearltrees.com/yasskoir/dlss4/id92890939" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 700; font-size: 0.8rem; display: block; margin-top: 10px;">Lien PearlTrees →</a>
                 </div>
             </div>
 
-            <a href="Veille_vGPU_IA.pdf" class="cta-download" target="_blank">
-                <div>
-                    <h4 style="margin-bottom:5px;">Synthèse complète de Veille</h4>
-                    <p style="font-size: 0.8rem; opacity: 0.9;">Télécharger le document PDF</p>
+            <a href="pdf/IADANSLESGPU.pdf" class="cta-download" target="_blank">
+                <div class="cta-text">
+                    <h4 style="color: white; margin-bottom: 5px;">Consulter la synthèse complète</h4>
+                    <p style="color: white; opacity: 0.8; font-size: 0.85rem;">Document PDF analysant l'impact du vGPU sur les métiers SISR.</p>
                 </div>
-                <i class="fas fa-file-pdf" style="font-size: 1.5rem;"></i>
+                <div style="font-size: 1.5rem;"><i class="fas fa-file-pdf"></i></div>
             </a>
         </main>
     </div>
 
-    <footer><p>&copy; 2026 Yassine Boulahia</p></footer>
+    <footer>
+        <p>&copy; 2026 Yassine Boulahia - Veille Technologique SISR</p>
+    </footer>
 
     <script>
         // --- GESTION DU THÈME ---
         const toggleBtn = document.getElementById('theme-toggle');
+        const icon = toggleBtn.querySelector('i');
+        const body = document.body;
+
         toggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('light-mode');
-            toggleBtn.innerHTML = document.body.classList.contains('light-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            body.classList.toggle('light-mode');
+            const isLight = body.classList.contains('light-mode');
+            icon.classList.replace(isLight ? 'fa-moon' : 'fa-sun', isLight ? 'fa-sun' : 'fa-moon');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
         });
 
-        // --- SCRIPT RSS AVEC BOUCLE INFINIE ---
-        async function fetchRSS() {
-            const grid = document.getElementById('rssGrid');
-            const feedURL = 'https://www.google.fr/alerts/feeds/06544073337020145377/10066427386293151662';
-            
-            // Proxy AllOrigins pour contourner le blocage CORS
-            const proxyURL = `https://api.allorigins.win/get?url=${encodeURIComponent(feedURL)}&ts=${Date.now()}`;
+        if(localStorage.getItem('theme') === 'light') { 
+            body.classList.add('light-mode'); 
+            icon.classList.replace('fa-moon', 'fa-sun'); 
+        }
+
+        // --- CHARGEMENT MULTI-FLUX RSS ---
+        const RSS_SOURCES = [
+            'https://www.google.fr/alerts/feeds/06544073337020145377/10066427386293151662',
+            'https://www.google.fr/alerts/feeds/06544073337020145377/9075143380343633617'
+        ];
+
+        async function fetchAllRSS() {
+            const container = document.getElementById('rssGrid');
+            let allItems = [];
 
             try {
-                const response = await fetch(proxyURL);
-                const data = await response.json();
-                
-                // Parser le XML reçu
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(data.contents, "text/xml");
-                const entries = xmlDoc.getElementsByTagName('entry');
+                // Requêtes parallèles pour toutes les sources
+                const promises = RSS_SOURCES.map(url => 
+                    fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`)
+                    .then(res => res.json())
+                );
 
-                if (entries.length > 0) {
-                    let itemsHTML = '';
+                const results = await Promise.all(promises);
 
-                    for (let i = 0; i < entries.length; i++) {
-                        const entry = entries[i];
-                        const title = entry.getElementsByTagName('title')[0].textContent;
-                        const link = entry.getElementsByTagName('link')[0].getAttribute('href');
-                        
-                        // Date
-                        const dateRaw = entry.getElementsByTagName('updated')[0].textContent;
-                        const dateObj = new Date(dateRaw);
-                        const dateStr = dateObj.toLocaleDateString('fr-FR', {day:'numeric', month:'short'});
-                        
-                        // Description (nettoyage HTML)
-                        let desc = entry.getElementsByTagName('content')[0].textContent;
-                        desc = desc.replace(/<[^>]*>?/gm, '').substring(0, 150) + '...';
-                        
-                        itemsHTML += `
+                results.forEach(data => {
+                    if (data.status === 'ok') {
+                        allItems = allItems.concat(data.items);
+                    }
+                });
+
+                // Tri par date décroissante (plus récent en premier)
+                allItems.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+
+                if (allItems.length > 0) {
+                    container.innerHTML = ''; 
+                    
+                    // On affiche les 10 derniers articles maximum pour garder la page propre
+                    allItems.slice(0, 10).forEach(item => {
+                        const dateObj = new Date(item.pubDate);
+                        const dateFormatted = dateObj.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+                        const cleanDesc = item.description.replace(/<[^>]*>?/gm, '').substring(0, 180) + '...';
+
+                        const articleHtml = `
                             <div class="rss-item">
-                                <span class="rss-date">${dateStr}</span>
-                                <a href="${link}" target="_blank">${title}</a>
-                                <p class="rss-desc">${desc}</p>
+                                <span class="rss-date">${dateFormatted}</span>
+                                <a href="${item.link}" target="_blank">${item.title}</a>
+                                <p class="rss-desc">${cleanDesc}</p>
                             </div>
                         `;
-                    }
-
-                    // LE SECRET DE LA BOUCLE : On injecte le contenu DEUX fois
-                    grid.innerHTML = itemsHTML + itemsHTML;
-                    
-                    // On lance l'animation une fois que le contenu est prêt
-                    grid.classList.add('animate-loop');
+                        container.innerHTML += articleHtml;
+                    });
                 } else {
-                    grid.innerHTML = '<p style="padding:20px; text-align:center;">Aucune donnée trouvée.</p>';
+                    throw new Error("Flux vides");
                 }
             } catch (error) {
-                console.error("Erreur RSS:", error);
-                grid.innerHTML = '<p style="padding:20px; text-align:center; color:#ff4500;">Erreur de connexion au flux RSS.</p>';
+                console.error(error);
+                container.innerHTML = `<p style="color: #ef4444; font-size:0.85rem;">Erreur de chargement. Veuillez consulter les flux manuellement.</p>`;
             }
         }
 
-        // Lancement au chargement
-        window.addEventListener('DOMContentLoaded', fetchRSS);
+        fetchAllRSS();
     </script>
 </body>
 </html>
